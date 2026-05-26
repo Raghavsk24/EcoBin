@@ -1,0 +1,25 @@
+{
+  "_comment": "Placeholder quiz manifest. Replace with real entries extracted from datasets/Test_Dataset.zip. Each entry: { image: '/quiz/<filename>', pathway: 'curbside_recycling'|'dropoff_recycling'|'compost'|'garbage', note: 'optional explanation' }",
+  "items": [
+    {
+      "image": "/quiz/example-plastic-bottle.jpg",
+      "pathway": "curbside_recycling",
+      "note": "Empty plastic water bottles go in your curbside recycling bin."
+    },
+    {
+      "image": "/quiz/example-greasy-pizza-box.jpg",
+      "pathway": "garbage",
+      "note": "Greasy cardboard cannot be recycled because the oil contaminates the paper fibers."
+    },
+    {
+      "image": "/quiz/example-banana-peel.jpg",
+      "pathway": "compost",
+      "note": "Banana peels and other food scraps go in compost."
+    },
+    {
+      "image": "/quiz/example-plastic-bag.jpg",
+      "pathway": "dropoff_recycling",
+      "note": "Plastic shopping bags need a specialty drop-off bin, not curbside recycling."
+    }
+  ]
+}
