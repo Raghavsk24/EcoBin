@@ -21,6 +21,8 @@ EcoBin addresses this by using computer vision to automatically identify and cat
 
 **Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
 
+**Medium blog:** https://medium.com/@senthilkumaraghav/week-1-of-13-ecobin-a-web-application-for-waste-classification-96dc9b105aac
+
 ## Tech stack
 
 ### Frontend
