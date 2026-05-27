@@ -27,9 +27,8 @@ export default function AboutTab() {
       </p>
 
       <p className="mb-5">
-        The first is a free AI software you can use, which is accessible in "The Scan Waste Item"
-        tab. It allows you to take a picture of the waste item you want to dispose of via your webcam (don&apos;t
-        have your face in the frame!) and it runs a three-stage neural network that identifies what the
+        The first is a free AI tool accessible in the "Scan Waste Item"
+        tab. Upload a photo of the waste item you want to dispose of and EcoBin runs a two-stage neural network that identifies what the
         object is, assesses its condition, and then explains how to dispose of the item.
       </p>
 
