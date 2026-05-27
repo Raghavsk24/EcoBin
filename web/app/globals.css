@@ -2,44 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light dark;
-}
-
 html, body {
   margin: 0;
   padding: 0;
+  background: #ffffff;
+  color: #000000;
 }
 
-body {
-  @apply bg-slate-50 text-slate-900 antialiased min-h-screen;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    @apply bg-slate-950 text-slate-50;
-  }
-}
-
-.card-pop {
-  @apply rounded-2xl shadow-md p-6 bg-white dark:bg-slate-900;
-}
-
-/* Flashcard flip animation */
-.flip-card {
-  perspective: 1500px;
-}
+/* Flashcard flip */
+.flip-card { perspective: 1500px; }
 .flip-inner {
-  transition: transform 0.6s;
+  transition: transform 0.5s;
   transform-style: preserve-3d;
 }
-.flip-inner.is-flipped {
-  transform: rotateY(180deg);
-}
+.flip-inner.is-flipped { transform: rotateY(180deg); }
 .flip-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-.flip-back {
-  transform: rotateY(180deg);
-}
+.flip-back { transform: rotateY(180deg); }
