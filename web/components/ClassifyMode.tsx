@@ -210,7 +210,7 @@ export default function ClassifyMode() {
               <li><strong>3.</strong> Read EcoBin&apos;s determination on how your item should be disposed of.</li>
             </ol>
             <p style={{ marginTop: 16, fontSize: '0.75rem', color: '#555' }}>
-              <strong style={{ color: '#000' }}>Note:</strong> We can be wrong! EcoBin&apos;s accuracy rate is estimated to be up to ~90%.
+              <strong style={{ color: '#000' }}>Note:</strong> EcoBin can be wrong and we estimate it most likeley will be. EcoBin was trained on studio-like images, so it probably will be very wrong when classifying objects in the real-world. If you believe it made a mistake, try again and take a picture from a different angle.
             </p>
             <label
               style={{ marginTop: 'auto', fontSize: '0.75rem', color: '#777', cursor: 'pointer', textDecoration: 'underline' }}
@@ -231,7 +231,7 @@ export default function ClassifyMode() {
                 <div style={{ height: 12, background: '#e5e7eb', borderRadius: 2, width: '75%', marginBottom: 8 }} className="animate-pulse" />
                 <div style={{ height: 12, background: '#e5e7eb', borderRadius: 2, width: '50%' }} className="animate-pulse" />
                 <p style={{ marginTop: 10, fontSize: '0.75rem', color: '#777' }}>
-                  Analysing... first request after idle takes a few extra seconds.
+                  Analysing... first request after idle takes about 20-30 seconds.
                 </p>
               </div>
             )}

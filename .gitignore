@@ -1,6 +1,5 @@
-# Datasets (too large for git)
-*.zip
-datasets/
+# This file
+.gitignore
 
 # Python
 __pycache__/
@@ -24,3 +23,6 @@ inference/stage_b_best.keras
 # OS
 .DS_Store
 Thumbs.db
+
+# Large dataset (920MB, exceeds GitHub LFS free tier)
+datasets/Recyclable and Household Waste Classification Dataset.zip

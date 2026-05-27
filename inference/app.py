@@ -103,6 +103,7 @@ CLEAN_CLASS_IDX = 0
 # (synthetic training data does not generalise to real-world photos). Set to
 # 1.01 to disable Stage B overrides until a real contamination dataset is available.
 STAGE_B_THRESHOLD = 0.90
+CLEAN_WEIGHT = 2.0  # multiplier applied to clean-class prob before renormalising
 
 # Load models once at import time
 log.info("Loading Stage A and Stage B models...")
@@ -195,6 +196,8 @@ def infer(req: InferRequest):
 
     if a_pathway in RECYCLING_PATHWAYS:
         b_probs = STAGE_B.predict(batch, verbose=0)[0]
+        b_probs[CLEAN_CLASS_IDX] *= CLEAN_WEIGHT
+        b_probs = b_probs / b_probs.sum()
         prob_contaminated = float(1.0 - b_probs[CLEAN_CLASS_IDX])
         pred_subgroup_idx = int(np.argmax(b_probs))
         stage_b_ran = True
