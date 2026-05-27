@@ -67,6 +67,17 @@ export default function AboutTab() {
             https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
           </a>
         </p>
+        <p>
+          <strong>Medium Blog:</strong>{' '}
+          <a
+            href="https://medium.com/@senthilkumaraghav/week-1-of-13-ecobin-a-web-application-for-waste-classification-96dc9b105aac"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            https://medium.com/@senthilkumaraghav/week-1-of-13-ecobin-a-web-application-for-waste-classification-96dc9b105aac
+          </a>
+        </p>
       </div>
     </div>
   );
