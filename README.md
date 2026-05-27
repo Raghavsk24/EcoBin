@@ -68,6 +68,5 @@ The app offers two features to help users make better disposal decisions.
 | Recyclable and Household Waste Classification | [https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) | 
 | Waste Contamination Textures | [https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) |
 | Synthetic Recyclable Contamination | Generated in notebook | 
-|EcoBin Pathway Test | [https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) |
 | EcoBin Disposal Pathway Test Set | [https://www.kaggle.com/datasets/ragbag84/ecobin-pathway-test-set](https://www.kaggle.com/datasets/ragbag84/ecobin-pathway-test-set) |
 
