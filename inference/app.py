@@ -14,6 +14,7 @@ import re
 from pathlib import Path
 
 import cv2
+import keras
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, HTTPException
@@ -23,6 +24,24 @@ from pydantic import BaseModel
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("ecobin")
+
+@keras.saving.register_keras_serializable()
+class WarmupCosineSchedule(keras.optimizers.schedules.LearningRateSchedule):
+    def __init__(self, start_lr, peak_lr, end_lr, warmup_steps, total_steps, **kwargs):
+        super().__init__(**kwargs)
+        self.start_lr = start_lr
+        self.peak_lr = peak_lr
+        self.end_lr = end_lr
+        self.warmup_steps = warmup_steps
+        self.total_steps = total_steps
+
+    def __call__(self, step):
+        return self.peak_lr
+
+    def get_config(self):
+        return {"start_lr": self.start_lr, "peak_lr": self.peak_lr,
+                "end_lr": self.end_lr, "warmup_steps": self.warmup_steps,
+                "total_steps": self.total_steps}
 
 IMG_SIZE = 224
 MODELS_DIR = Path(__file__).parent
@@ -87,8 +106,8 @@ STAGE_B_THRESHOLD = 0.90
 
 # Load models once at import time
 log.info("Loading Stage A and Stage B models...")
-STAGE_A = tf.keras.models.load_model(MODELS_DIR / "stage_a_best.keras")
-STAGE_B = tf.keras.models.load_model(MODELS_DIR / "stage_b_best.keras")
+STAGE_A = tf.keras.models.load_model(MODELS_DIR / "stage_a_best.keras", compile=False)
+STAGE_B = tf.keras.models.load_model(MODELS_DIR / "stage_b_best.keras", compile=False)
 FACE_CASCADE = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
