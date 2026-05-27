@@ -1,17 +1,25 @@
 # EcoBin
 
-EcoBin is an AI-powered waste classification platform designed to help people make better recycling and disposal decisions. In the United States, over **[292 million tons of waste are generated each year](https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/national-overview-facts-and-figures-materials)** and that number is expected to double by 2050. Yet [less than a third of our waste stream](https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/frequent-questions-regarding-epas-facts-and) is actually recycled, largely because **three-fourths of recyclable items are lost at the household level** and [a quarter of the items in our recycling bins](https://ecorithms.com/blog/recycling-contamination) are not recyclable due to contamination.
+EcoBin is an AI-powered waste classification platform that helps people sort their waste correctly and learn better recycling habits.Waste is a massive and growing problem. In the United States alone, over 292 million tons of waste are generated each year, and that number is expected to double by 2050. Yet less than a third of our waste stream is actually recycled, largely because roughly a quarter of what ends up in recycling bins doesn't belong there.
 
-EcoBin provides two tools to address this:
+EcoBin addresses this by using computer vision to automatically identify and categorize waste with **~95% accuracy**. It also includes a flashcard quiz with over **100 questions** to help people test and build their recycling knowledge.
 
-1. **Scan Waste Item** - Upload a photo of any waste item and a two-stage neural network identifies the object, assesses its condition, and tells you which bin it belongs in.
-2. **Quiz Yourself** - Test your recycling knowledge with a flashcard quiz drawn from a database of over 100 waste items.
 
-**Live app:** https://ecobin.vercel.app  
-**Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline  
-**HuggingFace Space:** https://huggingface.co/spaces/Raghavsk24/ecobin-inference
+<p>
+  <img width=49% height=49% <img width="1781" height="902" alt="image" src="https://github.com/user-attachments/assets/4d11966a-44c7-4dd5-9251-3b979d3bd527" />
+  <img width=49% height=49% <img width="1677" height="856" alt="image" src="https://github.com/user-attachments/assets/45a38cf7-3b89-4821-8264-6caa50ff5098" />
 
----
+
+</p>
+<p>
+  <img width=49% height=49% <img width="1761" height="912" alt="image" src="https://github.com/user-attachments/assets/9fd6613d-42df-4e3f-972a-d9d4a909c19c" />
+  <img width=49% height=49% <img width="1760" height="917" alt="image" src="https://github.com/user-attachments/assets/06a3482c-1d71-43f5-bced-d717273fcdec" />
+</p>
+
+
+**Live app:** https://eco-bin-sepia.vercel.app/
+
+**Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
 
 ## Tech stack
 
@@ -21,6 +29,7 @@ EcoBin provides two tools to address this:
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
 
 ### Backend
 
@@ -36,97 +45,28 @@ EcoBin provides two tools to address this:
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
----
-
 ## How it works
 
-EcoBin uses a two-stage classification pipeline.
+EcoBin uses a two-stage classification pipeline to categorize waste.
 
-**Stage A: Base Waste Classifier** identifies what the item is. It is a transfer learning model built on top of EfficientNetV2-S, pretrained on ImageNet, and fine-tuned on the [Recyclable and Household Waste Classification Dataset](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) from Kaggle. This dataset has over **15,000 images across 30 classes** covering plastic, paper, cardboard, glass, metal, organic waste, and textiles. Each of the 30 classes is mapped to one of three disposal pathways: `curbside_recycling`, `drop_off_recycling`, or `garbage`, using the recycling guidelines for the City of Phoenix.
+1. **Stage A: Base Waste Classifier** Stage A classifies the item based on its material composition. It's a transfer learning model built on EfficientNetV2-S, pretrained on ImageNet and fine-tuned on the Recyclable and Household Waste Classification Dataset from Kaggle, which contains over 15,000 images across 30 classes covering plastic, paper, cardboard, glass, metal, organic waste, and textiles. Each class is mapped to one of three disposal pathways (curbside recycling, drop-off recycling, or garbage) using the recycling guidelines for the City of Phoenix.
+2. **Stage B: Contamination Classifier** Stage B runs only when Stage A routes an item to a recycling bin. It checks whether the item is clean enough to recycle or whether contamination (food residue, grease, mold, paint, etc.) should redirect it to garbage. Stage B is trained on a synthetic dataset of 9,000 images, generated by segmenting clean recyclables from the Stage A dataset using U2-Net and then compositing contamination textures from the Waste Contamination Textures Dataset onto each object surface.
 
-**Stage B: Contamination Classifier** runs only when Stage A routes an item to a recycling bin. It checks whether the item is actually clean enough to recycle or whether contamination (food residue, grease, mold, paint, etc.) should redirect it to garbage. Stage B is trained on a synthetic dataset of **9,000 images** generated by segmenting clean recyclables from the Stage A dataset using U2-Net, then compositing contamination textures from the [Waste Contamination Textures Dataset](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) onto each object surface. Stage B is a 9-class softmax: one `clean` class and eight contaminant subgroups.
+## Vercel Web App
 
----
+The app offers two features to help users make better disposal decisions.
 
-## Repository structure
+1. The first is a free AI tool in the **Scan Waste Item** tab. Upload a photo of the item you want to dispose of and EcoBin runs its two-stage neural network to identify the object, assess its condition, and tell you how to dispose of it.
 
-```
-EcoBin/
-├── notebooks/          # Kaggle training pipeline (Stage A + Stage B)
-├── web/                # Next.js frontend deployed on Vercel
-├── inference/          # FastAPI inference server deployed on HuggingFace Spaces
-├── scripts/            # Data preparation utilities
-└── datasets/           # Raw datasets (not tracked in git)
-```
+2. The second is the **Quiz Yourself** tab. We have over 100 flashcards in our database covering a wide range of waste items. Each quiz pulls up to 10 random cards and asks you to guess how each item should be disposed of. After every question, you get an explanation of why your answer was right or wrong, and after all 10 you get a full results summary. You can retake the quiz up to 10 times.
 
-### `notebooks/`
-
-Contains the full end-to-end training pipeline as a Jupyter notebook. It covers:
-
-- Dataset preparation and class-to-pathway mapping
-- Stage A training: two-phase fine-tuning with warmup-cosine learning rate schedule
-- Stage A evaluation: per-class accuracy, confusion matrices, default vs. real-world domain gap, and adjusted accuracy (pathway-level)
-- Synthetic contamination dataset generation using U2-Net segmentation and texture compositing
-- Stage B training and evaluation
-- McNemar's test comparing Stage A alone vs. the full two-stage pipeline on contaminated recyclables
-
-### `web/`
-
-Next.js 15 app deployed on Vercel. The frontend has three tabs:
-
-- **About** - project overview and links
-- **Scan Waste Item** - photo upload with drag-and-drop support, image preview, and inference via the HuggingFace Space API
-- **Quiz Yourself** - 10-question flashcard quiz with per-question feedback and a results summary
-
-### `inference/`
-
-FastAPI server running in a Docker container on HuggingFace Spaces. It exposes a single `POST /infer` endpoint that accepts a base64-encoded image, applies a face detection privacy gate, runs Stage A to classify the item, and conditionally runs Stage B to check for contamination. The response includes the disposal pathway, item name, confidence score, and contamination probability.
-
-### `scripts/`
-
-Utility scripts used during dataset preparation:
-
-- `convert_images_to_png.py` - converts flashcard images to PNG
-- `extract_quiz.py` - extracts flashcard metadata into the quiz manifest
-- `remove_texture_background.py` - removes backgrounds from contamination texture images using rembg
-
----
-
-## Setup
-
-### Web app
-
-```bash
-cd web
-npm install
-cp .env.example .env.local   # fill in NEXT_PUBLIC_HF_SPACE_URL
-npm run dev
-```
-
-### Inference server
-
-```bash
-cd inference
-pip install -r requirements.txt
-uvicorn app:app --host 0.0.0.0 --port 8000
-```
-
-The inference server expects `stage_a_best.keras` and `stage_b_best.keras` in the same directory as `app.py`. These are not tracked in git due to file size. Download them from the [HuggingFace Space files](https://huggingface.co/spaces/Raghavsk24/ecobin-inference/tree/main).
-
----
 
 ## Datasets
 
-| Dataset | Source | Used for |
-|---|---|---|
-| Recyclable and Household Waste Classification | [Kaggle](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) | Stage A training |
-| Waste Contamination Textures | [Kaggle](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) | Synthetic contamination generation |
-| Synthetic Recyclable Contamination | Generated in notebook | Stage B training |
-| Contaminated Recyclables Test Set | [Kaggle](https://www.kaggle.com/datasets/ragbag84/contaminated-recyclables-test) | McNemar's test (Step 5) |
-| Flashcards | Included in `datasets/Flashcards/` | Quiz tab |
+| Dataset | Source | 
+|---|---|
+| Recyclable and Household Waste Classification | [https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) | 
+| Waste Contamination Textures | [https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) |
+| Synthetic Recyclable Contamination | Generated in notebook | 
+| EcoBin Disposal Pathway Test Set | [https://www.kaggle.com/datasets/ragbag84/ecobin-pathway-test-set](https://www.kaggle.com/datasets/ragbag84/ecobin-pathway-test-set) |
 
----
-
-## Author
-
-[Raghav Senthil Kumar](https://www.linkedin.com/in/raghav-senthil-kumar/)
