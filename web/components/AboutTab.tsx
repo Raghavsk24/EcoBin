@@ -1,6 +1,6 @@
 export default function AboutTab() {
   return (
-    <div className="p-8 max-w-3xl" style={{ lineHeight: '1.9', fontSize: '0.875rem' }}>
+    <div className="p-8" style={{ lineHeight: '1.9', fontSize: '0.875rem' }}>
       <p className="mb-5">
         Hi, my name is{' '}
         <a
@@ -13,27 +13,26 @@ export default function AboutTab() {
         </a>
         ! I created EcoBin to educate the community about recycling and waste. In the United
         States over <strong>292 million tons of waste are generated each year</strong> and that
-        number is expected to double by 2050. Yet less than a third of our{' '}
+        number is expected to double by 2050. Yet{' '}
         <a
           href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/frequent-questions-regarding-epas-facts-and"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
         >
-          waste stream
+          less than a third of our waste stream
         </a>{' '}
         is actually recycled. This is because nearly{' '}
         <strong>three-fourths of recyclable items are lost at the household level</strong>.
-        Moreover, a quarter of the{' '}
-        <a
+        Moreover, <a
           href="https://ecorithms.com/blog/recycling-contamination"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
         >
-          items
+          a quarter of the items in our recycling bins
         </a>{' '}
-        in our recycling bins are not recyclable due to contamination.
+        are not recyclable due to contamination.
       </p>
 
       <p className="mb-5">
@@ -41,8 +40,11 @@ export default function AboutTab() {
         disposal habits. This platform provides two resources you can use. The Scan Waste Item
         tab allows you to take a picture of the waste item you want to dispose of (don&apos;t
         have your face in the frame!) and it runs a neural network that identifies what the
-        object is, assesses its condition, and then explains how to dispose of the item. The
-        Quiz Yourself tab allows you to test your knowledge on recycling. We have over 100
+        object is, assesses its condition, and then explains how to dispose of the item.
+      </p>
+
+      <p className="mb-5">
+        The Quiz Yourself tab allows you to test your knowledge on recycling. We have over 100
         flashcards in our database. You can randomly quiz yourself on up to 10 of those
         flashcards at a time and try to guess how the waste item should be disposed of. After
         every question, the flashcard flips and you are given an explanation as to why you

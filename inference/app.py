@@ -80,7 +80,10 @@ STAGE_B_CLASS_NAMES = [
     "wet_paper_pulp",
 ]
 CLEAN_CLASS_IDX = 0
-STAGE_B_THRESHOLD = 0.5  # 1 - P(clean) override threshold
+# Threshold sweep showed Stage B degrades pathway accuracy at every cutoff
+# (synthetic training data does not generalise to real-world photos). Set to
+# 1.01 to disable Stage B overrides until a real contamination dataset is available.
+STAGE_B_THRESHOLD = 0.90
 
 # Load models once at import time
 log.info("Loading Stage A and Stage B models...")

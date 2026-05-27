@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 flex items-start justify-center p-6 pt-10">
           {children}
         </main>
-        <footer className="border-t border-black text-center text-xs py-3 text-black">
+        <footer className="text-center text-xs py-3 text-black">
           © 2025 Raghav Senthil Kumar. All rights reserved.
         </footer>
       </body>

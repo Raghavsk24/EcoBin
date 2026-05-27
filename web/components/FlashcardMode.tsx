@@ -9,6 +9,12 @@ interface QuizItem {
   note: string;
 }
 
+interface QuizResponse {
+  item: QuizItem;
+  userChoice: string | null;
+  isCorrect: boolean;
+}
+
 const TEST_SIZE = 10;
 
 const CHOICES: { key: string; label: string; color: string }[] = [
@@ -38,6 +44,7 @@ export default function FlashcardMode() {
   const [picked, setPicked] = useState<ChoiceKey | null>(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
+  const [responses, setResponses] = useState<QuizResponse[]>([]);
 
   useEffect(() => {
     fetch('/quiz/index.json')
@@ -54,7 +61,9 @@ export default function FlashcardMode() {
   function choose(key: ChoiceKey) {
     if (picked) return;
     setPicked(key);
-    if (key === cards[idx].pathway) setScore(s => s + 1);
+    const isCorrect = key === cards[idx].pathway;
+    if (isCorrect) setScore(s => s + 1);
+    setResponses(prev => [...prev, { item: cards[idx], userChoice: key, isCorrect }]);
   }
 
   function next() {
@@ -69,6 +78,7 @@ export default function FlashcardMode() {
     setPicked(null);
     setScore(0);
     setDone(false);
+    setResponses([]);
   }
 
   if (loadError) {
@@ -81,19 +91,84 @@ export default function FlashcardMode() {
   /* ── Results screen ── */
   if (done) {
     const pct = Math.round((score / TEST_SIZE) * 100);
+    
+    // Calculate most common mixup (wrong answer paired with correct answer)
+    const mixups = responses
+      .filter(r => !r.isCorrect)
+      .map(r => `${r.userChoice}|${r.item.pathway}`)
+      .filter(Boolean);
+    const mixupCounts = new Map<string, number>();
+    mixups.forEach(mixup => {
+      mixupCounts.set(mixup, (mixupCounts.get(mixup) || 0) + 1);
+    });
+    const mostCommonMixup = mixups.length > 0 
+      ? Array.from(mixupCounts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0]
+      : null;
+    const [mostCommonUserChoice, mostCommonCorrect] = mostCommonMixup?.split('|') || [null, null];
+    const mostCommonUserLabel = mostCommonUserChoice ? CHOICE_MAP[mostCommonUserChoice]?.label : null;
+    const mostCommonCorrectLabel = mostCommonCorrect ? CHOICE_MAP[mostCommonCorrect]?.label : null;
+
     return (
-      <div style={{ padding: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-        <div style={{ border: '1px solid #000', padding: '40px 48px', textAlign: 'center', width: '100%', maxWidth: 380 }}>
-          <p style={{ fontSize: '3.5rem', fontWeight: 700, lineHeight: 1.1 }}>{score}/{TEST_SIZE}</p>
+      <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
+        {/* Score summary */}
+        <div style={{ border: '1px solid #000', padding: '32px 24px', textAlign: 'center' }}>
+          <p style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1.1 }}>{score}/{TEST_SIZE}</p>
           <p style={{ fontSize: '0.875rem', color: '#777', marginTop: 6 }}>{pct}% correct</p>
-          <p style={{ fontSize: '1rem', fontWeight: 700, marginTop: 12 }}>
+          <p style={{ fontSize: '0.95rem', fontWeight: 700, marginTop: 12 }}>
             {score >= 9 ? 'Perfect!' : score >= 7 ? 'Great job!' : score >= 5 ? 'Keep studying!' : 'Keep practicing!'}
           </p>
+          {mostCommonUserLabel && mostCommonCorrectLabel && (
+            <p style={{ fontSize: '0.8rem', color: '#666', marginTop: 8 }}>
+              Most common mixup:{' '}
+              <span style={{ color: '#e74c3c' }}>{mostCommonUserLabel}</span>
+              {' '}with{' '}
+              <span style={{ color: '#47b868' }}>{mostCommonCorrectLabel}</span>
+            </p>
+          )}
         </div>
+
+        {/* All questions review */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {responses.map((response, i) => (
+            <div key={i} style={{ border: '1px solid #ccc', padding: 16 }}>
+              <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#666', marginBottom: 8 }}>Question {i + 1}</p>
+              
+              {/* Image */}
+              <img
+                src={response.item.image}
+                alt={response.item.title}
+                style={{ maxHeight: 75, objectFit: 'contain', border: '1px solid #e5e7eb', marginBottom: 12, display: 'block' }}
+              />
+              
+              {/* Item title */}
+              <p style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: 8 }}>{response.item.title}</p>
+              
+              {/* User choice and result */}
+              <p style={{ fontSize: '0.8125rem', marginBottom: 8 }}>
+                <strong>Your answer:</strong>{' '}
+                <span style={{ color: response.isCorrect ? '#47b868' : '#e74c3c' }}>
+                  {response.userChoice ? CHOICE_MAP[response.userChoice]?.label : 'Not answered'}
+                  {response.isCorrect ? ' ✓' : ' ✗'}
+                </span>
+              </p>
+              
+              {!response.isCorrect && (
+                <p style={{ fontSize: '0.8125rem', marginBottom: 8, color: '#666' }}>
+                  <strong>Correct answer:</strong> {CHOICE_MAP[response.item.pathway]?.label}
+                </p>
+              )}
+              
+              {/* Explanation */}
+              <p style={{ fontSize: '0.8125rem', color: '#555', lineHeight: 1.6 }}>{response.item.note}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Next quiz button */}
         <button
           onClick={restart}
           style={{
-            width: '100%', maxWidth: 380,
+            width: '100%',
             border: '1px solid #000', padding: '12px 24px',
             fontSize: '0.875rem', cursor: 'pointer',
             background: '#000', color: '#fff',
@@ -125,17 +200,17 @@ export default function FlashcardMode() {
       {/* Image + choices side by side */}
       <div style={{ display: 'flex', gap: 24 }}>
 
-        {/* Image */}
-        <div style={{ flex: 1 }}>
+        {/* Image - Square */}
+        <div style={{ flex: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img
             src={card.image}
             alt="quiz item"
-            style={{ width: '100%', maxHeight: 340, objectFit: 'cover', border: '1px solid #000', display: 'block' }}
+            style={{ maxHeight: 340, maxWidth: 340, objectFit: 'contain', border: '1px solid #000', display: 'block' }}
           />
         </div>
 
         {/* Choice buttons */}
-        <div style={{ width: 220, display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'center' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'center' }}>
           <p style={{ fontSize: '0.75rem', color: '#777', marginBottom: 4 }}>Which bin does this go in?</p>
           {CHOICES.map(({ key, label, color }) => {
             let bg      = color as string;
@@ -204,3 +279,4 @@ export default function FlashcardMode() {
     </div>
   );
 }
+
