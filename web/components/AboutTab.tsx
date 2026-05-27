@@ -40,6 +40,10 @@ export default function AboutTab() {
         were either right or wrong and a summary of you results (kinda like Quizlet). You can take up to 10 different quizzes!
       </p>
 
+      <p className="mb-5">
+        EcoBin is a research project, not a certified recycling authority. While Stage A achieves a pathway-level accuracy of 96.3% on its test set, that number was measured on studio-like photos from its training dataset, not on arbitrary phone or laptop camera photos from users like you. If EcoBin gives you a result that doesn't seem right, trust your instincts and check your local recycling guidelines. When in doubt, throw it out.
+      </p>
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.875rem' }}>
         <p>
           <strong>GitHub:</strong>{' '}
