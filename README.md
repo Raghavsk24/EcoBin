@@ -4,7 +4,7 @@ EcoBin is an AI-powered waste classification platform designed to help people ma
 
 EcoBin provides two tools to address this:
 
-1. **Scan Waste Item** - Point your camera at any waste item and a two-stage neural network identifies the object, assesses its condition, and tells you which bin it belongs in.
+1. **Scan Waste Item** - Upload a photo of any waste item and a two-stage neural network identifies the object, assesses its condition, and tells you which bin it belongs in.
 2. **Quiz Yourself** - Test your recycling knowledge with a flashcard quiz drawn from a database of over 100 waste items.
 
 **Live app:** https://ecobin.vercel.app  
@@ -50,7 +50,7 @@ Contains the full end-to-end training pipeline as a Jupyter notebook. It covers:
 Next.js 15 app deployed on Vercel. The frontend has three tabs:
 
 - **About** - project overview and links
-- **Scan Waste Item** - live camera feed with COCO-SSD object detection, image capture, and inference via the HuggingFace Space API
+- **Scan Waste Item** - photo upload with drag-and-drop support, image preview, and inference via the HuggingFace Space API
 - **Quiz Yourself** - 10-question flashcard quiz with per-question feedback and a results summary
 
 ### `inference/`
