@@ -1,0 +1,26 @@
+# Datasets (too large for git)
+*.zip
+datasets/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+
+# Next.js
+web/.next/
+web/node_modules/
+web/.env.local
+
+# Inference models (tracked via HuggingFace LFS separately)
+inference/stage_a_best.keras
+inference/stage_b_best.keras
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
