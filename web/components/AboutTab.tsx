@@ -11,7 +11,7 @@ export default function AboutTab() {
         >
           Raghav Senthil Kumar
         </a>
-        ! I created EcoBin to educate the community about recycling and waste. In the United
+        ! I created EcoBin to help better educate the population about recycling and waste disposal habits. In the United
         States over <strong>292 million tons of waste are generated each year</strong> and that
         number is expected to double by 2050. Yet{' '}
         <a
@@ -32,23 +32,22 @@ export default function AboutTab() {
         >
           a quarter of the items in our recycling bins
         </a>{' '}
-        are not recyclable due to contamination.
+        are not recyclable due to contamination. EcoBin provides two resources you can use.
       </p>
 
       <p className="mb-5">
-        EcoBin is a platform to help better educate the population about recycling and waste
-        disposal habits. This platform provides two resources you can use. The Scan Waste Item
-        tab allows you to take a picture of the waste item you want to dispose of (don&apos;t
-        have your face in the frame!) and it runs a neural network that identifies what the
+        The first is a free AI software you can use, which is accessible in "The Scan Waste Item"
+        tab.  allows you to take a picture of the waste item you want to dispose of via your webcam (don&apos;t
+        have your face in the frame!) and it runs a three-stage neural network that identifies what the
         object is, assesses its condition, and then explains how to dispose of the item.
       </p>
 
       <p className="mb-5">
-        The Quiz Yourself tab allows you to test your knowledge on recycling. We have over 100
+        The "Quiz Yourself tab presents an educational resource that allows you to test your recycling knowledge and learn. We have over 100
         flashcards in our database. You can randomly quiz yourself on up to 10 of those
         flashcards at a time and try to guess how the waste item should be disposed of. After
-        every question, the flashcard flips and you are given an explanation as to why you
-        were either right or wrong (kinda like Quizlet).
+        every question, you are given an explanation as to why you
+        were either right or wrong and a summary of you results (kinda like Quizlet). You can take up to 10 different quizzes!
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.875rem' }}>
