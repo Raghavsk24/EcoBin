@@ -98,8 +98,6 @@ The app offers two features to help users make better disposal decisions.
 
 ## Datasets
 
-## Datasets
-
 | Dataset | Source | Used for |
 |---|---|---|
 | Recyclable and Household Waste Classification | [Kaggle](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) | Stage A training |
