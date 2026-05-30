@@ -19,9 +19,9 @@ EcoBin addresses this by using computer vision to automatically identify and cat
 
 **Live app:** https://eco-bin-sepia.vercel.app/
 
-**Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
+**Research Paper DOI:** 10.13140/RG.2.2.16845.81120
 
-**Medium blog:** https://medium.com/@senthilkumaraghav/week-1-of-13-ecobin-a-web-application-for-waste-classification-96dc9b105aac
+**Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
 
 ## Tech stack
 
