@@ -95,13 +95,3 @@ The app offers two features to help users make better disposal decisions.
 
 2. The second is the **Quiz Yourself** tab. We have over 100 flashcards in our database covering a wide range of waste items. Each quiz pulls up to 10 random cards and asks you to guess how each item should be disposed of. After every question, you get an explanation of why your answer was right or wrong, and after all 10 you get a full results summary. You can retake the quiz up to 10 times.
 
-
-## Datasets
-
-| Dataset | Source | Used for |
-|---|---|---|
-| Recyclable and Household Waste Classification | [Kaggle](https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification) | Stage A training |
-| Waste Contamination Textures | [Kaggle](https://www.kaggle.com/datasets/ragbag84/waste-contamination-textures-dataset) | Synthetic contamination generation |
-| Synthetic Recyclable Contamination | Generated in notebook | Stage B training |
-| EcoBin Disposal Pathway Test Set | [Kaggle](https://www.kaggle.com/datasets/ragbag84/ecobin-pathway-test-set) | McNemar's Statistical Test Evaluation |
-
