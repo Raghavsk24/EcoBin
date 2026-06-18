@@ -24,8 +24,7 @@ export default function ResultCard({ result }: Props) {
     );
   }
 
-  const pathway = (result.final_pathway ?? 'garbage') as Pathway;
-  const stageOverrode = result.stage_b_ran && result.stage_a_pathway !== result.final_pathway;
+  const pathway = (result.pathway ?? 'garbage') as Pathway;
 
   return (
     <div className="space-y-3">
@@ -49,32 +48,12 @@ export default function ResultCard({ result }: Props) {
             <p className="font-medium">
               {result.predicted_class ? prettifyClassName(result.predicted_class) : '—'}
             </p>
-            {typeof result.stage_a_confidence === 'number' && (
+            {typeof result.confidence === 'number' && (
               <p className="text-xs text-zinc-500 mt-0.5">
-                {Math.round(result.stage_a_confidence * 100)}% confident
+                {Math.round(result.confidence * 100)}% confident
               </p>
             )}
           </div>
-
-          {result.stage_b_ran && result.stage_b_result && (
-            <div>
-              <p className="text-zinc-500 text-xs uppercase tracking-wide mb-1">Contamination check</p>
-              {stageOverrode ? (
-                <p className="text-zinc-300">
-                  This looked recyclable, but our contamination check found{' '}
-                  <span className="text-rose-400 font-medium">
-                    {prettifyClassName(result.stage_b_result.predicted_subgroup)}
-                  </span>
-                  {' '}({Math.round(result.stage_b_result.prob_contaminated * 100)}% confidence),
-                  so it should go to garbage.
-                </p>
-              ) : (
-                <p className="text-zinc-300">
-                  Checked for food residue, liquid, and other contamination. Looks clean.
-                </p>
-              )}
-            </div>
-          )}
         </div>
       )}
     </div>

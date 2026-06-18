@@ -1,20 +1,11 @@
-// Client for the HuggingFace Space inference endpoint.
-
-export interface StageBResult {
-  predicted_subgroup: string;
-  prob_contaminated:  number;
-  threshold:          number;
-}
+// Client for the EcoBin inference endpoint.
 
 export interface InferResponse {
-  status:             'ok' | 'rejected';
-  reason:             string | null;
-  predicted_class:    string | null;
-  stage_a_confidence: number | null;
-  stage_a_pathway:    string | null;
-  final_pathway:      string | null;
-  stage_b_ran:        boolean;
-  stage_b_result:     StageBResult | null;
+  status:          'ok' | 'rejected';
+  reason:          string | null;
+  predicted_class: string | null;
+  confidence:      number | null;
+  pathway:         string | null;
 }
 
 const HF_URL = process.env.NEXT_PUBLIC_HF_SPACE_URL;
@@ -36,7 +27,7 @@ export async function classifyImage(base64: string, timeoutMs = 90_000): Promise
     });
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(`HF Space returned ${res.status}: ${text}`);
+      throw new Error(`Inference server returned ${res.status}: ${text}`);
     }
     return (await res.json()) as InferResponse;
   } finally {

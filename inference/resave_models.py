@@ -1,4 +1,4 @@
-"""Re-save models without the custom optimizer so they load anywhere."""
+"""Re-save model without the custom optimizer so it loads anywhere."""
 import keras
 import tensorflow as tf
 from pathlib import Path
@@ -22,14 +22,8 @@ class WarmupCosineSchedule(keras.optimizers.schedules.LearningRateSchedule):
                 "total_steps": self.total_steps}
 
 d = Path(__file__).parent
-print("Loading Stage A...")
-a = tf.keras.models.load_model(d / "stage_a_best.keras", compile=False)
-print("Saving Stage A...")
-a.save(d / "stage_a_best.keras")
-
-print("Loading Stage B...")
-b = tf.keras.models.load_model(d / "stage_b_best.keras", compile=False)
-print("Saving Stage B...")
-b.save(d / "stage_b_best.keras")
-
-print("Done! Models re-saved without custom optimizer.")
+print("Loading model...")
+m = tf.keras.models.load_model(d / "stage_a_best.keras", compile=False)
+print("Saving model...")
+m.save(d / "stage_a_best.keras")
+print("Done! Model re-saved without custom optimizer.")
