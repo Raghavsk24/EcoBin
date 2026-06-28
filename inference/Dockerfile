@@ -1,21 +1,22 @@
+# Hugging Face Space (Docker SDK). HF routes traffic to $PORT (7860 by default).
 FROM python:3.11-slim
 
-ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    TF_CPP_MIN_LOG_LEVEL=2
-
-# OpenCV needs a couple of system libs even with the headless wheel
+# libGL/libglib are needed by opencv-python-headless at import time.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libglib2.0-0 \
-    libgl1 \
+        libgl1 libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# HF mounts persistent storage (if enabled) at /data; keep correction memory there.
+ENV MEMORY_PATH=/data/correction_memory.json \
+    PORT=7860
+
 EXPOSE 7860
+
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]

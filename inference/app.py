@@ -1,164 +1,218 @@
-"""FastAPI inference service for the EcoBin waste classifier.
+"""EcoBin inference backend (FastAPI, deployed as a Hugging Face Space).
 
-Loads the EfficientNet-B0 .keras checkpoint at startup, applies the
-face-cascade privacy gate, and returns a structured disposal recommendation
-for any single uploaded image.
+Endpoints
+---------
+GET  /health            liveness + warmth probe (also used to keep the Space warm)
+POST /predict           image -> {item, pathway, physical_bin, confidence,
+                                  gradcam, prediction_id, corrected_by_memory, ...}
+POST /feedback          {prediction_id, correct_item} -> store a correction
+
+The model (``efficientnet-b0-weights.keras``) is loaded once at startup. Images
+are preprocessed exactly as in training: RGB, resized to 224x224, float32, **raw
+0-255 pixels** (EfficientNetB0 normalizes internally — do NOT rescale here, it
+silently wrecks accuracy).
+
+Correction memory ("learn from mistakes") is handled by :mod:`memory`: each
+prediction's 1280-d embedding is cached by ``prediction_id`` so a later
+``/feedback`` call can store ``(embedding, correct_item)`` without re-uploading
+the image. Subsequent predictions whose embedding is very close to a stored
+correction are overridden.
 """
+
 from __future__ import annotations
 
 import base64
 import io
 import logging
 import os
-import re
-from pathlib import Path
+import time
+import uuid
 
-import cv2
-import keras
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+from gradcam import build_inference_graphs, compute_gradcam
+from labels import (
+    CLASS_NAMES,
+    CONFIDENCE_THRESHOLD,
+    IMG_SIZE,
+    pathway_for,
+    physical_bin_for,
+    pretty,
+)
+from memory import CorrectionMemory
 
 logging.basicConfig(level=logging.INFO)
-log = logging.getLogger("ecobin")
+log = logging.getLogger("ecobin-inference")
 
-@keras.saving.register_keras_serializable()
-class WarmupCosineSchedule(keras.optimizers.schedules.LearningRateSchedule):
-    def __init__(self, start_lr, peak_lr, end_lr, warmup_steps, total_steps, **kwargs):
-        super().__init__(**kwargs)
-        self.start_lr = start_lr
-        self.peak_lr = peak_lr
-        self.end_lr = end_lr
-        self.warmup_steps = warmup_steps
-        self.total_steps = total_steps
-
-    def __call__(self, step):
-        return self.peak_lr
-
-    def get_config(self):
-        return {"start_lr": self.start_lr, "peak_lr": self.peak_lr,
-                "end_lr": self.end_lr, "warmup_steps": self.warmup_steps,
-                "total_steps": self.total_steps}
-
-IMG_SIZE = 224
-MODELS_DIR = Path(__file__).parent
-
-DISPOSAL_MAP: dict[str, str] = {
-    "aerosol_cans":               "Recycling",
-    "aluminum_food_cans":         "Recycling",
-    "aluminum_soda_cans":         "Recycling",
-    "cardboard_boxes":            "Recycling",
-    "cardboard_packaging":        "Recycling",
-    "glass_beverage_bottles":     "Recycling",
-    "glass_cosmetic_containers":  "Recycling",
-    "glass_food_jars":            "Recycling",
-    "magazines":                  "Recycling",
-    "newspaper":                  "Recycling",
-    "office_paper":               "Recycling",
-    "paper_cups":                 "Recycling",
-    "plastic_detergent_bottles":  "Recycling",
-    "plastic_food_containers":    "Recycling",
-    "plastic_soda_bottles":       "Recycling",
-    "plastic_water_bottles":      "Recycling",
-    "steel_food_cans":            "Recycling",
-    "clothing":                   "Garbage",
-    "disposable_plastic_cutlery": "Garbage",
-    "plastic_cup_lids":           "Garbage",
-    "plastic_shopping_bags":      "Garbage",
-    "plastic_straws":             "Garbage",
-    "plastic_trash_bags":         "Garbage",
-    "shoes":                      "Garbage",
-    "styrofoam_cups":             "Garbage",
-    "styrofoam_food_containers":  "Garbage",
-    "coffee_grounds":             "Compost",
-    "eggshells":                  "Compost",
-    "food_waste":                 "Compost",
-    "tea_bags":                   "Compost",
-}
-
-CLASS_NAMES = sorted(DISPOSAL_MAP.keys())
-
-log.info("Loading model...")
-MODEL = tf.keras.models.load_model(MODELS_DIR / "stage_a_best.keras", compile=False)
-FACE_CASCADE = cv2.CascadeClassifier(
-    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+MODEL_PATH = os.getenv("MODEL_PATH", "efficientnet-b0-weights.keras")
+# /data is HF persistent storage when enabled; falls back to the working dir.
+MEMORY_PATH = os.getenv(
+    "MEMORY_PATH",
+    "/data/correction_memory.json" if os.path.isdir("/data") else "correction_memory.json",
 )
-log.info("Model ready.")
+MEMORY_THRESHOLD = float(os.getenv("MEMORY_THRESHOLD", "0.92"))
+PREDICTION_TTL_SECONDS = 600  # how long a prediction_id stays valid for feedback
 
-app = FastAPI(title="EcoBin Inference", version="2.0.0")
-
+app = FastAPI(title="EcoBin Inference", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["POST", "GET", "OPTIONS"],
+    allow_origins=["*"],  # the Next.js route proxies, but allow direct calls too
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Populated in startup_event.
+_model: tf.keras.Model | None = None
+_backbone = None
+_head_model = None
+_embedding_model = None
+_memory: CorrectionMemory | None = None
+# prediction_id -> (embedding, model_item, timestamp)
+_pending: dict[str, tuple[np.ndarray, str, float]] = {}
 
-class InferRequest(BaseModel):
-    image_base64: str
+
+@app.on_event("startup")
+def startup_event() -> None:
+    global _model, _backbone, _head_model, _embedding_model, _memory
+    log.info("Loading model from %s ...", MODEL_PATH)
+    _model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    _backbone, _head_model, _embedding_model = build_inference_graphs(_model)
+    _memory = CorrectionMemory(MEMORY_PATH, threshold=MEMORY_THRESHOLD)
+    # Warm the graph so the first real request hits the 1-2s target.
+    warm = np.zeros((1, IMG_SIZE, IMG_SIZE, 3), dtype=np.float32)
+    _model(warm, training=False)
+    _embedding_model(warm, training=False)
+    log.info("Model ready. Correction memory holds %d entries.", _memory.size)
 
 
-def _decode_base64_image(b64: str) -> np.ndarray:
-    """Strip the optional data-URL prefix and return an RGB uint8 ndarray."""
-    if not b64:
-        raise HTTPException(status_code=400, detail="empty image")
-    b64 = re.sub(r"^data:image/[^;]+;base64,", "", b64)
+# ── request/response models ──────────────────────────────────────────────────
+
+class PredictRequest(BaseModel):
+    image: str = Field(..., description="base64 image, optionally a data: URI")
+
+
+class FeedbackRequest(BaseModel):
+    prediction_id: str
+    correct_item: str = Field(..., description="one of the 30 CLASS_NAMES")
+
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+def _decode_image(image_b64: str) -> np.ndarray:
+    """Decode a (possibly data-URI) base64 image to a 224x224x3 uint8 RGB array."""
+    if "," in image_b64 and image_b64.strip().startswith("data:"):
+        image_b64 = image_b64.split(",", 1)[1]
     try:
-        raw = base64.b64decode(b64)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"invalid base64: {e}")
-    try:
-        img = Image.open(io.BytesIO(raw)).convert("RGB")
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"invalid image: {e}")
-    return np.array(img)
+        raw = base64.b64decode(image_b64)
+        img = Image.open(io.BytesIO(raw)).convert("RGB").resize((IMG_SIZE, IMG_SIZE))
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=f"Bad image: {exc}") from exc
+    return np.asarray(img, dtype=np.uint8)
 
 
-def _contains_face(image: np.ndarray) -> bool:
-    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    faces = FACE_CASCADE.detectMultiScale(
-        gray, scaleFactor=1.1, minNeighbors=5, minSize=(50, 50)
-    )
-    return len(faces) > 0
+def _prune_pending(now: float) -> None:
+    stale = [k for k, (_, _, ts) in _pending.items() if now - ts > PREDICTION_TTL_SECONDS]
+    for k in stale:
+        _pending.pop(k, None)
 
+
+# ── endpoints ────────────────────────────────────────────────────────────────
 
 @app.get("/health")
-def health():
-    return {"status": "ok"}
+def health() -> dict:
+    return {
+        "status": "ok" if _model is not None else "loading",
+        "model_loaded": _model is not None,
+        "memory_size": _memory.size if _memory else 0,
+        "classes": len(CLASS_NAMES),
+    }
 
 
-@app.post("/infer")
-def infer(req: InferRequest):
-    """Run the classifier on one image and return a structured result."""
-    image = _decode_base64_image(req.image_base64)
+@app.post("/predict")
+def predict(req: PredictRequest) -> dict:
+    if _model is None or _memory is None:
+        raise HTTPException(status_code=503, detail="Model still loading")
 
-    if _contains_face(image):
-        return {
-            "status":          "rejected",
-            "reason":          "face_detected",
-            "predicted_class": None,
-            "confidence":      None,
-            "pathway":         None,
-        }
+    original_rgb = _decode_image(req.image)
+    batch = original_rgb.astype(np.float32)[np.newaxis, ...]  # raw 0-255, no rescale
 
-    pil = Image.fromarray(image).resize((IMG_SIZE, IMG_SIZE))
-    batch = np.expand_dims(np.array(pil), axis=0).astype("float32")
-
-    probs = MODEL.predict(batch, verbose=0)[0]
+    probs = _model(batch, training=False).numpy()[0]
     idx = int(np.argmax(probs))
-    predicted_class = CLASS_NAMES[idx]
+    model_item = CLASS_NAMES[idx]
     confidence = float(probs[idx])
-    pathway = DISPOSAL_MAP.get(predicted_class, "Garbage")
+
+    embedding = _embedding_model(batch, training=False).numpy()[0]
+
+    # Correction memory may override a known-mistaken prediction.
+    corrected_label, similarity = _memory.query(embedding)
+    if corrected_label is not None:
+        item = corrected_label
+        corrected_by_memory = True
+    else:
+        item = model_item
+        corrected_by_memory = False
+
+    pathway = pathway_for(item)
+
+    # Grad-CAM explains what the *model* looked at -> use the model's class index.
+    gradcam_b64 = compute_gradcam(_backbone, _head_model, batch, original_rgb, idx)
+
+    now = time.time()
+    _prune_pending(now)
+    prediction_id = uuid.uuid4().hex
+    _pending[prediction_id] = (embedding, model_item, now)
 
     return {
-        "status":          "ok",
-        "reason":          None,
-        "predicted_class": predicted_class,
-        "confidence":      confidence,
-        "pathway":         pathway,
+        "prediction_id": prediction_id,
+        "item": item,
+        "item_label": pretty(item),
+        "pathway": pathway,
+        "physical_bin": physical_bin_for(pathway),
+        "confidence": round(confidence, 4),
+        "low_confidence": confidence < CONFIDENCE_THRESHOLD,
+        "corrected_by_memory": corrected_by_memory,
+        "memory_similarity": round(similarity, 4),
+        "model_item": model_item,
+        "model_item_label": pretty(model_item),
+        "gradcam": gradcam_b64,
     }
+
+
+@app.post("/feedback")
+def feedback(req: FeedbackRequest) -> dict:
+    if _memory is None:
+        raise HTTPException(status_code=503, detail="Model still loading")
+    if req.correct_item not in CLASS_NAMES:
+        raise HTTPException(status_code=422, detail="correct_item not a known class")
+
+    pending = _pending.get(req.prediction_id)
+    if pending is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Unknown or expired prediction_id; re-scan the item",
+        )
+
+    embedding, _model_item, _ts = pending
+    _memory.add(embedding, req.correct_item)
+    _pending.pop(req.prediction_id, None)
+
+    pathway = pathway_for(req.correct_item)
+    return {
+        "status": "learned",
+        "correct_item": req.correct_item,
+        "correct_item_label": pretty(req.correct_item),
+        "pathway": pathway,
+        "physical_bin": physical_bin_for(pathway),
+        "memory_size": _memory.size,
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "7860")))
