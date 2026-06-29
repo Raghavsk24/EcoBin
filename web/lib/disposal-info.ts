@@ -1,30 +1,25 @@
-// Disposal pathway display metadata. Used by the result card and the quiz.
+// Disposal pathway display metadata for the quiz. Exactly three pathways:
+// Recycling, Compost, Garbage.
 
-export type Pathway =
-  | 'curbside_recycling'
-  | 'dropoff_recycling'
-  | 'compost'
-  | 'garbage';
+export type Pathway = 'recycling' | 'compost' | 'garbage';
 
 export const PATHWAY_LABEL: Record<Pathway, string> = {
-  curbside_recycling: 'Curbside Recycling',
-  dropoff_recycling:  'Drop-off Recycling',
-  compost:            'Compost',
-  garbage:            'Garbage',
+  recycling: 'Recycling',
+  compost:   'Compost',
+  garbage:   'Garbage',
 };
 
-export const PATHWAY_BG: Record<Pathway, string> = {
-  curbside_recycling: 'bg-pathway-curbside',
-  dropoff_recycling:  'bg-pathway-dropoff',
-  compost:            'bg-pathway-compost',
-  garbage:            'bg-pathway-garbage',
+// EcoBin brand colors: blue for recycling, green for compost, slate for garbage.
+export const PATHWAY_COLOR: Record<Pathway, string> = {
+  recycling: '#1973e6',
+  compost:   '#47b868',
+  garbage:   '#4b5563',
 };
 
 export const PATHWAY_BLURB: Record<Pathway, string> = {
-  curbside_recycling: 'Place in your blue curbside recycling bin.',
-  dropoff_recycling:  'Take this to a specialty recycling drop-off (grocery store bins, e-waste depots, etc.).',
-  compost:            'Add this to your green compost bin or backyard compost pile.',
-  garbage:            'Goes in the regular trash bin.',
+  recycling: 'Place this in your recycling bin.',
+  compost:   'Add this to your compost bin or pile.',
+  garbage:   'Goes in the regular trash bin.',
 };
 
 export function prettifyClassName(s: string): string {
