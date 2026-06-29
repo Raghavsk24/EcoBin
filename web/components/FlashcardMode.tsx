@@ -18,9 +18,9 @@ interface QuizResponse {
 const TEST_SIZE = 10;
 
 const CHOICES: { key: string; label: string; color: string }[] = [
-  { key: 'curbside_recycling', label: 'Curbside Recycling', color: '#1973e6' },
-  { key: 'dropoff_recycling',  label: 'Drop-off Recycling', color: '#9549b6' },
-  { key: 'garbage',            label: 'Garbage',            color: '#47b868' },
+  { key: 'recycling', label: 'Recycling', color: '#1973e6' },
+  { key: 'compost',   label: 'Compost',   color: '#47b868' },
+  { key: 'garbage',   label: 'Garbage',   color: '#4b5563' },
 ];
 
 type ChoiceKey = string;

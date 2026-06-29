@@ -3,602 +3,452 @@
     {
       "image": "/quiz/aerosol_cans_1.jpg",
       "title": "Aerosol Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aerosol Can. It should be disposed off in curbside recycling because empty aerosol cans are made of recyclable metal and are accepted in most curbside programs once completely empty."
+      "pathway": "recycling",
+      "note": "Empty aerosol cans are made of recyclable steel or aluminum and are accepted in most curbside recycling programs once completely empty."
     },
     {
       "image": "/quiz/aerosol_cans_2.jpg",
       "title": "Aerosol Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aerosol Can. It should be disposed off in curbside recycling because empty aerosol cans are made of recyclable metal and are accepted in most curbside programs once completely empty."
+      "pathway": "recycling",
+      "note": "Empty aerosol cans are made of recyclable steel or aluminum and are accepted in most curbside recycling programs once completely empty."
     },
     {
       "image": "/quiz/aerosol_cans_3.jpg",
       "title": "Aerosol Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aerosol Can. It should be disposed off in curbside recycling because empty aerosol cans are made of recyclable metal and are accepted in most curbside programs once completely empty."
+      "pathway": "recycling",
+      "note": "Empty aerosol cans are made of recyclable steel or aluminum and are accepted in most curbside recycling programs once completely empty."
     },
     {
       "image": "/quiz/alumnium_food_cans_1.jpg",
-      "title": "Aluminium Food Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aluminium Food Can. It should be disposed off in curbside recycling because aluminium is endlessly recyclable and food cans are widely accepted after a quick rinse to remove food residue."
+      "title": "Aluminum Food Cans",
+      "pathway": "recycling",
+      "note": "Aluminum is endlessly recyclable. Give food cans a quick rinse and they are widely accepted in recycling."
     },
     {
       "image": "/quiz/alumnium_food_cans_2.jpg",
-      "title": "Aluminium Food Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aluminium Food Can. It should be disposed off in curbside recycling because aluminium is endlessly recyclable and food cans are widely accepted after a quick rinse to remove food residue."
+      "title": "Aluminum Food Cans",
+      "pathway": "recycling",
+      "note": "Aluminum is endlessly recyclable. Give food cans a quick rinse and they are widely accepted in recycling."
     },
     {
       "image": "/quiz/alumnium_soda_cans_1.jpg",
-      "title": "Aluminium Soda Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aluminium Soda Can. It should be disposed off in curbside recycling because aluminium is endlessly recyclable and soda cans are highly valuable in recycling programs."
+      "title": "Aluminum Soda Cans",
+      "pathway": "recycling",
+      "note": "Aluminum soda cans are one of the most valuable items in the recycling stream and can be recycled again and again."
     },
     {
       "image": "/quiz/alumnium_soda_cans_2.jpg",
-      "title": "Aluminium Soda Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is an Aluminium Soda Can. It should be disposed off in curbside recycling because aluminium is endlessly recyclable and soda cans are highly valuable in recycling programs."
+      "title": "Aluminum Soda Cans",
+      "pathway": "recycling",
+      "note": "Aluminum soda cans are one of the most valuable items in the recycling stream and can be recycled again and again."
     },
     {
       "image": "/quiz/cardboard_boxes_1.jpg",
       "title": "Cardboard Boxes",
-      "pathway": "curbside_recycling",
-      "note": "This is a Cardboard Box. It should be disposed off in curbside recycling because cardboard is one of the most commonly recycled materials and should be flattened to save space in sorting facilities."
+      "pathway": "recycling",
+      "note": "Cardboard is one of the most commonly recycled materials. Flatten boxes to save space in sorting facilities."
     },
     {
       "image": "/quiz/cardboard_boxes_2.jpg",
       "title": "Cardboard Boxes",
-      "pathway": "curbside_recycling",
-      "note": "This is a Cardboard Box. It should be disposed off in curbside recycling because cardboard is one of the most commonly recycled materials and should be flattened to save space in sorting facilities."
+      "pathway": "recycling",
+      "note": "Cardboard is one of the most commonly recycled materials. Flatten boxes to save space in sorting facilities."
     },
     {
       "image": "/quiz/cardboard_boxes_3.jpg",
       "title": "Cardboard Boxes",
-      "pathway": "curbside_recycling",
-      "note": "This is a Cardboard Box. It should be disposed off in curbside recycling because cardboard is one of the most commonly recycled materials and should be flattened to save space in sorting facilities."
+      "pathway": "recycling",
+      "note": "Cardboard is one of the most commonly recycled materials. Flatten boxes to save space in sorting facilities."
     },
     {
       "image": "/quiz/clothing_1.jpg",
       "title": "Clothing",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Clothing. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
+      "pathway": "garbage",
+      "note": "Worn-out clothing goes in the garbage. (Still-wearable items are better donated, but EcoBin sorts clothing to garbage.)"
     },
     {
       "image": "/quiz/clothing_2.jpg",
       "title": "Clothing",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Clothing. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
+      "pathway": "garbage",
+      "note": "Worn-out clothing goes in the garbage. (Still-wearable items are better donated, but EcoBin sorts clothing to garbage.)"
     },
     {
       "image": "/quiz/clothing_3.jpg",
       "title": "Clothing",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Clothing. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/glass_beverage_bottles_1.jpg",
-      "title": "Glass Beverage Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Glass Bottle. It should be disposed off in curbside recycling because glass is infinitely recyclable and bottles are easily sorted and can be made into new containers."
-    },
-    {
-      "image": "/quiz/glass_beverage_bottles_2.jpg",
-      "title": "Glass Beverage Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Glass Bottle. It should be disposed off in curbside recycling because glass is infinitely recyclable and bottles are easily sorted and can be made into new containers."
-    },
-    {
-      "image": "/quiz/glass_cosmetic_containers_1.jpg",
-      "title": "Glass Cosmetic Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Glass Cosmetic Container. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/glass_cosmetic_containers_2.jpg",
-      "title": "Glass Cosmetic Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Glass Cosmetic Container. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/glass_cosmetic_containers_3.jpg",
-      "title": "Glass Cosmetic Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Glass Cosmetic Container. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/glass_food_jars_1.jpg",
-      "title": "Glass Food Jars",
-      "pathway": "curbside_recycling",
-      "note": "This is a Jar. It should be disposed off in curbside recycling because glass jars are infinitely recyclable and can be melted down to create new glass products."
-    },
-    {
-      "image": "/quiz/glass_food_jars_2.jpg",
-      "title": "Glass Food Jars",
-      "pathway": "curbside_recycling",
-      "note": "This is a Jar. It should be disposed off in curbside recycling because glass jars are infinitely recyclable and can be melted down to create new glass products."
-    },
-    {
-      "image": "/quiz/magazines_1.jpg",
-      "title": "Magazines",
-      "pathway": "curbside_recycling",
-      "note": "This is a Magazine. It should be disposed off in curbside recycling because magazines are acceptable recyclables though glossy paper requires careful processing."
-    },
-    {
-      "image": "/quiz/magazines_2.jpg",
-      "title": "Magazines",
-      "pathway": "curbside_recycling",
-      "note": "This is a Magazine. It should be disposed off in curbside recycling because magazines are acceptable recyclables though glossy paper requires careful processing."
-    },
-    {
-      "image": "/quiz/newspaper_1.jpg",
-      "title": "Newspaper",
-      "pathway": "curbside_recycling",
-      "note": "This is Paper. It should be disposed off in curbside recycling because clean paper is one of the easiest materials to recycle and has high value in recycling streams."
-    },
-    {
-      "image": "/quiz/newspaper_2.jpg",
-      "title": "Newspaper",
-      "pathway": "curbside_recycling",
-      "note": "This is Paper. It should be disposed off in curbside recycling because clean paper is one of the easiest materials to recycle and has high value in recycling streams."
-    },
-    {
-      "image": "/quiz/office_paper_1.jpg",
-      "title": "Office Paper",
-      "pathway": "curbside_recycling",
-      "note": "This is Paper. It should be disposed off in curbside recycling because clean paper is one of the easiest materials to recycle and has high value in recycling streams."
-    },
-    {
-      "image": "/quiz/office_paper_2.jpg",
-      "title": "Office Paper",
-      "pathway": "curbside_recycling",
-      "note": "This is Paper. It should be disposed off in curbside recycling because clean paper is one of the easiest materials to recycle and has high value in recycling streams."
-    },
-    {
-      "image": "/quiz/plastic_cup_lids_1.jpg",
-      "title": "Plastic Cup Lids",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Cup Lids. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_cup_lids_2.jpg",
-      "title": "Plastic Cup Lids",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Cup Lids. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_cup_lids_3.jpg",
-      "title": "Plastic Cup Lids",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Cup Lids. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_detergent_bottles_1.jpg",
-      "title": "Plastic Detergent Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Detergent Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_detergent_bottles_2.jpg",
-      "title": "Plastic Detergent Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Detergent Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_detergent_bottles_3.jpg",
-      "title": "Plastic Detergent Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Detergent Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_food_containers_1.jpg",
-      "title": "Plastic Food Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Food Containers. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_food_containers_2.jpg",
-      "title": "Plastic Food Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Food Containers. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_food_containers_3.jpg",
-      "title": "Plastic Food Containers",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Food Containers. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_shopping_bags_1.jpg",
-      "title": "Plastic Shopping Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Shopping Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_shopping_bags_2.jpg",
-      "title": "Plastic Shopping Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Shopping Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_shopping_bags_3.jpg",
-      "title": "Plastic Shopping Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Shopping Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_soda_bottles_1.jpg",
-      "title": "Plastic Soda Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Soda Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_soda_bottles_2.jpg",
-      "title": "Plastic Soda Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Soda Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_soda_bottles_3.jpg",
-      "title": "Plastic Soda Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Soda Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_trash_bags_1.jpg",
-      "title": "Plastic Trash Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Trash Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_trash_bags_2.jpg",
-      "title": "Plastic Trash Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Trash Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_trash_bags_3.jpg",
-      "title": "Plastic Trash Bags",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Trash Bags. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/plastic_water_bottles_1.jpg",
-      "title": "Plastic Water Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Water Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/plastic_water_bottles_2.jpg",
-      "title": "Plastic Water Bottles",
-      "pathway": "curbside_recycling",
-      "note": "This is a Plastic Water Bottles. It should be disposed off in curbside recycling because it is composed of recyclable materials and is accepted in most curbside programs."
-    },
-    {
-      "image": "/quiz/shoes_1.jpg",
-      "title": "Shoes",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Shoe. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/shoes_2.jpg",
-      "title": "Shoes",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Shoe. It should be disposed off in drop-off recycling because it is composed of recyclable materials and is accepted in most drop-off recycling programs."
-    },
-    {
-      "image": "/quiz/steel_food_cans_1.jpg",
-      "title": "Steel Food Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is a Steel Food Cans. It should be disposed off in curbside recycling because steel and tin are magnetic metals that are easily recovered and recycled into new products."
-    },
-    {
-      "image": "/quiz/steel_food_cans_2.jpg",
-      "title": "Steel Food Cans",
-      "pathway": "curbside_recycling",
-      "note": "This is a Steel Food Cans. It should be disposed off in curbside recycling because steel and tin are magnetic metals that are easily recovered and recycled into new products."
-    },
-    {
-      "image": "/quiz/aerosol_cans_contaminated_1.jpg",
-      "title": "Aerosol Cans (Contaminated)",
       "pathway": "garbage",
-      "note": "This is an Aerosol Can. Usually, it should be disposed off in curbside recycling. However, the presence of residual pressurized product means it can't be recycled anymore as it poses a fire and explosion hazard to sorting equipment and workers. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/aluminum_food_cans_contaminated.jpg",
-      "title": "Aluminium Food Cans (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is an Aluminium Food Can. Usually, it should be disposed off in curbside recycling. However, the presence of dried food remnants stuck to the interior means it can't be recycled anymore as it attracts pests and contaminates the aluminum recycling stream. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/aluminum_soda_cans_contaminated.jpg",
-      "title": "Aluminium Soda Cans (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is an Aluminium Soda Can. Usually, it should be disposed off in curbside recycling. However, the presence of sticky residue from sugary liquid means it can't be recycled anymore as it causes contamination during the melting process. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/cardboard_boxes_contaminated_1.jpg",
-      "title": "Cardboard Boxes (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Cardboard Box. Usually, it should be disposed off in curbside recycling. However, the presence of grease and oil stains means it can't be recycled anymore as it breaks down into pulp and ruins the paper fiber quality. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/clothing_contaminated.jpg",
-      "title": "Clothing (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is Clothing. Usually, it should be disposed off in drop-off recycling centers. However, the presence of heavy stains or damage means it can't be recycled anymore as the fibers are compromised. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/glass_beverage_bottles_contaminated_1.jpg",
-      "title": "Glass Beverage Bottles (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Glass Beverage Bottle. Usually, it should be disposed off in curbside recycling. However, the presence of labels with adhesive residue and leftover liquid means it can't be recycled anymore as the adhesive contaminates the glass and the liquid causes mold. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/glass_cosmetic_containers_contaminated_1.jpg",
-      "title": "Glass Cosmetic Containers (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Glass Cosmetic Container. Usually, it should be disposed off in curbside recycling. However, the presence of cosmetic residue stuck to the interior means it can't be recycled anymore as the creams and oils interfere with the glass recycling process. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/glass_food_jars_contaminated_1.jpg",
-      "title": "Glass Food Jars (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Glass Food Jar. Usually, it should be disposed off in curbside recycling. However, the presence of dried food particles and sauce residue means it can't be recycled anymore as it attracts rodents and creates biocontamination. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/glass_food_jars_contaminated_2.jpg",
-      "title": "Glass Food Jars (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Glass Food Jar. Usually, it should be disposed off in curbside recycling. However, the presence of dried food particles and sauce residue means it can't be recycled anymore as it attracts rodents and creates biocontamination. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/magazine_contaminated_1.webp",
-      "title": "Magazine (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Magazine. Usually, it should be disposed off in curbside recycling. However, the presence of water damage and mold growth means it can't be recycled anymore as the wet fibers break apart and ruin the paper recycling batch. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/magazine_contaminated_2.jpg",
-      "title": "Magazine (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Magazine. Usually, it should be disposed off in curbside recycling. However, the presence of water damage and mold growth means it can't be recycled anymore as the wet fibers break apart and ruin the paper recycling batch. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/newspaper_contaminated.jpg",
-      "title": "Newspaper (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is Newspaper. Usually, it should be disposed off in curbside recycling. However, the presence of moisture and ink bleeding means it can't be recycled anymore as wet newspaper creates clogs in sorting machinery. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/office_paper_contaminated.jpg",
-      "title": "Office Paper (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is Office Paper. Usually, it should be disposed off in curbside recycling. However, the presence of coffee stains and water damage means it can't be recycled anymore as the contaminated fibers weaken the paper strength. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_cup_lid_contaminated_1.jpg",
-      "title": "Plastic Cup Lid (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Cup Lid. Usually, it should be disposed off in curbside recycling. However, the presence of dried beverage residue means it can't be recycled anymore as it gunks up sorting equipment and contaminates other plastics. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_cup_lid_contaminated_2.jpg",
-      "title": "Plastic Cup Lid (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Cup Lid. Usually, it should be disposed off in curbside recycling. However, the presence of dried beverage residue means it can't be recycled anymore as it gunks up sorting equipment and contaminates other plastics. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_detergent_bottles_contaminated_1.jpg",
-      "title": "Plastic Detergent Bottles (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Detergent Bottle. Usually, it should be disposed off in curbside recycling. However, the presence of residual detergent and chemical residue means it can't be recycled anymore as these hazardous chemicals are incompatible with plastic recycling processes. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_food_containers_contaminated_1.jpg",
-      "title": "Plastic Food Containers (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Food Container. Usually, it should be disposed off in curbside recycling. However, the presence of congealed food particles and grease means it can't be recycled anymore as it creates blockages in processing equipment. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_shopping_bags_contaminated_1.jpg",
-      "title": "Plastic Shopping Bags (Contaminated)",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Shopping Bag. Usually, it should be disposed off in drop-off recycling centers. However, the presence of food remnants and contamination means it can't be recycled anymore as it jams sorting machinery and ruins other materials. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_soda_bottle_contaminated_1.jpg",
-      "title": "Plastic Soda Bottle (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Soda Bottle. Usually, it should be disposed off in curbside recycling. However, the presence of syrupy residue and bacterial growth means it can't be recycled anymore as the sticky substance causes equipment jams and creates odors. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_trash_bags_contaminated_1.jpg",
-      "title": "Plastic Trash Bags (Contaminated)",
-      "pathway": "dropoff_recycling",
-      "note": "This is a Plastic Trash Bag. Usually, it should be disposed off in drop-off recycling centers. However, the presence of trash and debris inside means it can't be recycled anymore as it contaminates all materials it contacts. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_water_bottles_contaminated_1.jpg",
-      "title": "Plastic Water Bottles (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Water Bottles (Contaminated). Usually, it should be disposed off in curbside recycling. However, contamination from food or hazardous materials means it can't be recycled anymore. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/plastic_water_bottles_contaminated_2.jpg",
-      "title": "Plastic Water Bottles (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Plastic Water Bottles (Contaminated). Usually, it should be disposed off in curbside recycling. However, contamination from food or hazardous materials means it can't be recycled anymore. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/shoe_contaminated_1.jpg",
-      "title": "Shoe (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Shoe (Contaminated). Usually, it should be disposed off in curbside recycling. However, contamination from food or hazardous materials means it can't be recycled anymore. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/shoe_contaminated_2.jpg",
-      "title": "Shoe (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Shoe (Contaminated). Usually, it should be disposed off in curbside recycling. However, contamination from food or hazardous materials means it can't be recycled anymore. Therefore, it should be disposed off in the garbage bin."
-    },
-    {
-      "image": "/quiz/steel_food_cans_contaminated.jpg",
-      "title": "Steel Food Cans (Contaminated)",
-      "pathway": "garbage",
-      "note": "This is a Steel Food Cans (Contaminated). Usually, it should be disposed off in curbside recycling. However, contamination from food or hazardous materials means it can't be recycled anymore. Therefore, it should be disposed off in the garbage bin."
+      "note": "Worn-out clothing goes in the garbage. (Still-wearable items are better donated, but EcoBin sorts clothing to garbage.)"
     },
     {
       "image": "/quiz/disposable_plastic_cutlery_1.jpg",
       "title": "Disposable Plastic Cutlery",
       "pathway": "garbage",
-      "note": "This is a Disposable Plastic Cutlery. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Disposable plastic cutlery is not accepted in curbside recycling and can jam equipment, so it goes in the garbage."
     },
     {
       "image": "/quiz/disposable_plastic_cutlery_2.png",
       "title": "Disposable Plastic Cutlery",
       "pathway": "garbage",
-      "note": "This is a Disposable Plastic Cutlery. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Disposable plastic cutlery is not accepted in curbside recycling and can jam equipment, so it goes in the garbage."
     },
     {
       "image": "/quiz/disposable_plastic_cutlery_3.jpg",
       "title": "Disposable Plastic Cutlery",
       "pathway": "garbage",
-      "note": "This is a Disposable Plastic Cutlery. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Disposable plastic cutlery is not accepted in curbside recycling and can jam equipment, so it goes in the garbage."
     },
     {
       "image": "/quiz/disposable_plastic_cutlery_4.jpg",
       "title": "Disposable Plastic Cutlery",
       "pathway": "garbage",
-      "note": "This is a Disposable Plastic Cutlery. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Disposable plastic cutlery is not accepted in curbside recycling and can jam equipment, so it goes in the garbage."
     },
     {
       "image": "/quiz/disposable_plastic_cutlery_5.jpg",
       "title": "Disposable Plastic Cutlery",
       "pathway": "garbage",
-      "note": "This is a Disposable Plastic Cutlery. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Disposable plastic cutlery is not accepted in curbside recycling and can jam equipment, so it goes in the garbage."
+    },
+    {
+      "image": "/quiz/glass_beverage_bottles_1.jpg",
+      "title": "Glass Beverage Bottles",
+      "pathway": "recycling",
+      "note": "Glass is infinitely recyclable. Beverage bottles are easily sorted and remade into new containers."
+    },
+    {
+      "image": "/quiz/glass_beverage_bottles_2.jpg",
+      "title": "Glass Beverage Bottles",
+      "pathway": "recycling",
+      "note": "Glass is infinitely recyclable. Beverage bottles are easily sorted and remade into new containers."
+    },
+    {
+      "image": "/quiz/glass_cosmetic_containers_1.jpg",
+      "title": "Glass Cosmetic Containers",
+      "pathway": "recycling",
+      "note": "Glass cosmetic containers are recyclable. Empty and rinse them before placing them in recycling."
+    },
+    {
+      "image": "/quiz/glass_cosmetic_containers_2.jpg",
+      "title": "Glass Cosmetic Containers",
+      "pathway": "recycling",
+      "note": "Glass cosmetic containers are recyclable. Empty and rinse them before placing them in recycling."
+    },
+    {
+      "image": "/quiz/glass_cosmetic_containers_3.jpg",
+      "title": "Glass Cosmetic Containers",
+      "pathway": "recycling",
+      "note": "Glass cosmetic containers are recyclable. Empty and rinse them before placing them in recycling."
+    },
+    {
+      "image": "/quiz/glass_food_jars_1.jpg",
+      "title": "Glass Food Jars",
+      "pathway": "recycling",
+      "note": "Glass jars are infinitely recyclable and can be melted down into new glass products."
+    },
+    {
+      "image": "/quiz/glass_food_jars_2.jpg",
+      "title": "Glass Food Jars",
+      "pathway": "recycling",
+      "note": "Glass jars are infinitely recyclable and can be melted down into new glass products."
+    },
+    {
+      "image": "/quiz/magazines_1.jpg",
+      "title": "Magazines",
+      "pathway": "recycling",
+      "note": "Magazines are recyclable, though the glossy paper requires careful processing."
+    },
+    {
+      "image": "/quiz/magazines_2.jpg",
+      "title": "Magazines",
+      "pathway": "recycling",
+      "note": "Magazines are recyclable, though the glossy paper requires careful processing."
+    },
+    {
+      "image": "/quiz/newspaper_1.jpg",
+      "title": "Newspaper",
+      "pathway": "recycling",
+      "note": "Clean newspaper is one of the easiest materials to recycle and has high value in paper recycling streams."
+    },
+    {
+      "image": "/quiz/newspaper_2.jpg",
+      "title": "Newspaper",
+      "pathway": "recycling",
+      "note": "Clean newspaper is one of the easiest materials to recycle and has high value in paper recycling streams."
+    },
+    {
+      "image": "/quiz/office_paper_1.jpg",
+      "title": "Office Paper",
+      "pathway": "recycling",
+      "note": "Clean office paper is highly recyclable and its strong fibers can be reused several times."
+    },
+    {
+      "image": "/quiz/office_paper_2.jpg",
+      "title": "Office Paper",
+      "pathway": "recycling",
+      "note": "Clean office paper is highly recyclable and its strong fibers can be reused several times."
     },
     {
       "image": "/quiz/paper_cups_1.jpg",
       "title": "Paper Cups",
-      "pathway": "garbage",
-      "note": "This is a Paper Cups. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "pathway": "recycling",
+      "note": "EcoBin sorts paper cups into recycling. Empty and dry them before placing them in the bin."
     },
     {
       "image": "/quiz/paper_cups_2.jpg",
       "title": "Paper Cups",
-      "pathway": "garbage",
-      "note": "This is a Paper Cups. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "pathway": "recycling",
+      "note": "EcoBin sorts paper cups into recycling. Empty and dry them before placing them in the bin."
     },
     {
       "image": "/quiz/paper_cups_3.jpg",
       "title": "Paper Cups",
-      "pathway": "garbage",
-      "note": "This is a Paper Cups. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "pathway": "recycling",
+      "note": "EcoBin sorts paper cups into recycling. Empty and dry them before placing them in the bin."
     },
     {
       "image": "/quiz/paper_cups_4.jpg",
       "title": "Paper Cups",
-      "pathway": "garbage",
-      "note": "This is a Paper Cups. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "pathway": "recycling",
+      "note": "EcoBin sorts paper cups into recycling. Empty and dry them before placing them in the bin."
     },
     {
       "image": "/quiz/paper_cups_5.jpg",
       "title": "Paper Cups",
+      "pathway": "recycling",
+      "note": "EcoBin sorts paper cups into recycling. Empty and dry them before placing them in the bin."
+    },
+    {
+      "image": "/quiz/plastic_cup_lids_1.jpg",
+      "title": "Plastic Cup Lids",
       "pathway": "garbage",
-      "note": "This is a Paper Cups. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic cup lids are typically not accepted in curbside recycling and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_cup_lids_2.jpg",
+      "title": "Plastic Cup Lids",
+      "pathway": "garbage",
+      "note": "Plastic cup lids are typically not accepted in curbside recycling and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_cup_lids_3.jpg",
+      "title": "Plastic Cup Lids",
+      "pathway": "garbage",
+      "note": "Plastic cup lids are typically not accepted in curbside recycling and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_detergent_bottles_1.jpg",
+      "title": "Plastic Detergent Bottles",
+      "pathway": "recycling",
+      "note": "Rigid plastic detergent bottles (HDPE) are widely accepted in curbside recycling once emptied."
+    },
+    {
+      "image": "/quiz/plastic_detergent_bottles_2.jpg",
+      "title": "Plastic Detergent Bottles",
+      "pathway": "recycling",
+      "note": "Rigid plastic detergent bottles (HDPE) are widely accepted in curbside recycling once emptied."
+    },
+    {
+      "image": "/quiz/plastic_detergent_bottles_3.jpg",
+      "title": "Plastic Detergent Bottles",
+      "pathway": "recycling",
+      "note": "Rigid plastic detergent bottles (HDPE) are widely accepted in curbside recycling once emptied."
+    },
+    {
+      "image": "/quiz/plastic_food_containers_1.jpg",
+      "title": "Plastic Food Containers",
+      "pathway": "recycling",
+      "note": "Rigid plastic food containers are recyclable in most programs once rinsed clean."
+    },
+    {
+      "image": "/quiz/plastic_food_containers_2.jpg",
+      "title": "Plastic Food Containers",
+      "pathway": "recycling",
+      "note": "Rigid plastic food containers are recyclable in most programs once rinsed clean."
+    },
+    {
+      "image": "/quiz/plastic_food_containers_3.jpg",
+      "title": "Plastic Food Containers",
+      "pathway": "recycling",
+      "note": "Rigid plastic food containers are recyclable in most programs once rinsed clean."
+    },
+    {
+      "image": "/quiz/plastic_shopping_bags_1.jpg",
+      "title": "Plastic Shopping Bags",
+      "pathway": "garbage",
+      "note": "Thin plastic shopping bags tangle recycling machinery, so they belong in the garbage (or a store film drop-off where available)."
+    },
+    {
+      "image": "/quiz/plastic_shopping_bags_2.jpg",
+      "title": "Plastic Shopping Bags",
+      "pathway": "garbage",
+      "note": "Thin plastic shopping bags tangle recycling machinery, so they belong in the garbage (or a store film drop-off where available)."
+    },
+    {
+      "image": "/quiz/plastic_shopping_bags_3.jpg",
+      "title": "Plastic Shopping Bags",
+      "pathway": "garbage",
+      "note": "Thin plastic shopping bags tangle recycling machinery, so they belong in the garbage (or a store film drop-off where available)."
+    },
+    {
+      "image": "/quiz/plastic_soda_bottles_1.jpg",
+      "title": "Plastic Soda Bottles",
+      "pathway": "recycling",
+      "note": "Plastic soda bottles (PET) are highly recyclable. Empty them and replace the cap before recycling."
+    },
+    {
+      "image": "/quiz/plastic_soda_bottles_2.jpg",
+      "title": "Plastic Soda Bottles",
+      "pathway": "recycling",
+      "note": "Plastic soda bottles (PET) are highly recyclable. Empty them and replace the cap before recycling."
+    },
+    {
+      "image": "/quiz/plastic_soda_bottles_3.jpg",
+      "title": "Plastic Soda Bottles",
+      "pathway": "recycling",
+      "note": "Plastic soda bottles (PET) are highly recyclable. Empty them and replace the cap before recycling."
     },
     {
       "image": "/quiz/plastic_straws_1.jpg",
       "title": "Plastic Straws",
       "pathway": "garbage",
-      "note": "This is a Plastic Straws. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic straws are too small and light to be sorted by recycling equipment, so they go in the garbage."
     },
     {
       "image": "/quiz/plastic_straws_2.jpg",
       "title": "Plastic Straws",
       "pathway": "garbage",
-      "note": "This is a Plastic Straws. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic straws are too small and light to be sorted by recycling equipment, so they go in the garbage."
     },
     {
       "image": "/quiz/plastic_straws_3.jpg",
       "title": "Plastic Straws",
       "pathway": "garbage",
-      "note": "This is a Plastic Straws. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic straws are too small and light to be sorted by recycling equipment, so they go in the garbage."
     },
     {
       "image": "/quiz/plastic_straws_4.jpg",
       "title": "Plastic Straws",
       "pathway": "garbage",
-      "note": "This is a Plastic Straws. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic straws are too small and light to be sorted by recycling equipment, so they go in the garbage."
     },
     {
       "image": "/quiz/plastic_straws_5.jpg",
       "title": "Plastic Straws",
       "pathway": "garbage",
-      "note": "This is a Plastic Straws. It belongs in the garbage bin because it is not accepted in curbside recycling programs or poses a safety hazard during processing."
+      "note": "Plastic straws are too small and light to be sorted by recycling equipment, so they go in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_trash_bags_1.jpg",
+      "title": "Plastic Trash Bags",
+      "pathway": "garbage",
+      "note": "Plastic trash bags are not recyclable curbside and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_trash_bags_2.jpg",
+      "title": "Plastic Trash Bags",
+      "pathway": "garbage",
+      "note": "Plastic trash bags are not recyclable curbside and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_trash_bags_3.jpg",
+      "title": "Plastic Trash Bags",
+      "pathway": "garbage",
+      "note": "Plastic trash bags are not recyclable curbside and belong in the garbage."
+    },
+    {
+      "image": "/quiz/plastic_water_bottles_1.jpg",
+      "title": "Plastic Water Bottles",
+      "pathway": "recycling",
+      "note": "Plastic water bottles (PET) are among the most commonly recycled plastics."
+    },
+    {
+      "image": "/quiz/plastic_water_bottles_2.jpg",
+      "title": "Plastic Water Bottles",
+      "pathway": "recycling",
+      "note": "Plastic water bottles (PET) are among the most commonly recycled plastics."
+    },
+    {
+      "image": "/quiz/shoes_1.jpg",
+      "title": "Shoes",
+      "pathway": "garbage",
+      "note": "Worn-out shoes go in the garbage. (Still-wearable pairs are better donated.)"
+    },
+    {
+      "image": "/quiz/shoes_2.jpg",
+      "title": "Shoes",
+      "pathway": "garbage",
+      "note": "Worn-out shoes go in the garbage. (Still-wearable pairs are better donated.)"
+    },
+    {
+      "image": "/quiz/steel_food_cans_1.jpg",
+      "title": "Steel Food Cans",
+      "pathway": "recycling",
+      "note": "Steel and tin cans are magnetic metals that are easily recovered and recycled into new products."
+    },
+    {
+      "image": "/quiz/steel_food_cans_2.jpg",
+      "title": "Steel Food Cans",
+      "pathway": "recycling",
+      "note": "Steel and tin cans are magnetic metals that are easily recovered and recycled into new products."
     },
     {
       "image": "/quiz/styfrofoam_food_containers_4.jpg",
       "title": "Styrofoam Food Containers",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam food containers are not accepted in curbside recycling and take hundreds of years to break down, so they belong in the garbage."
     },
     {
       "image": "/quiz/styfrofoam_food_containers_5.jpg",
       "title": "Styrofoam Food Containers",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam food containers are not accepted in curbside recycling and take hundreds of years to break down, so they belong in the garbage."
     },
     {
       "image": "/quiz/styrofoam_cups_1.jpg",
       "title": "Styrofoam Cups",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam is not accepted in curbside recycling and takes hundreds of years to break down, so it belongs in the garbage."
     },
     {
       "image": "/quiz/styrofoam_cups_2.jpg",
       "title": "Styrofoam Cups",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam is not accepted in curbside recycling and takes hundreds of years to break down, so it belongs in the garbage."
     },
     {
       "image": "/quiz/styrofoam_cups_3.jpg",
       "title": "Styrofoam Cups",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam is not accepted in curbside recycling and takes hundreds of years to break down, so it belongs in the garbage."
     },
     {
       "image": "/quiz/styrofoam_cups_4.jpg",
       "title": "Styrofoam Cups",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam is not accepted in curbside recycling and takes hundreds of years to break down, so it belongs in the garbage."
     },
     {
       "image": "/quiz/styrofoam_cups_5.jpg",
       "title": "Styrofoam Cups",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam is not accepted in curbside recycling and takes hundreds of years to break down, so it belongs in the garbage."
     },
     {
       "image": "/quiz/styrofoam_food_containers_1.jpg",
       "title": "Styrofoam Food Containers",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam food containers are not accepted in curbside recycling and take hundreds of years to break down, so they belong in the garbage."
     },
     {
       "image": "/quiz/styrofoam_food_containers_2.jpg",
       "title": "Styrofoam Food Containers",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam food containers are not accepted in curbside recycling and take hundreds of years to break down, so they belong in the garbage."
     },
     {
       "image": "/quiz/styrofoam_food_containers_3.jpg",
       "title": "Styrofoam Food Containers",
       "pathway": "garbage",
-      "note": "This is Styrofoam. It belongs in the garbage bin because styrofoam is not accepted in curbside recycling programs and takes hundreds of years to decompose."
+      "note": "Styrofoam food containers are not accepted in curbside recycling and take hundreds of years to break down, so they belong in the garbage."
     }
   ]
 }
