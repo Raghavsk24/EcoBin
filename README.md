@@ -5,16 +5,16 @@ EcoBin is an AI-powered waste classification platform that helps people sort the
 EcoBin addresses this by using computer vision to automatically identify and categorize waste with **~95% accuracy**. It explains every prediction with a **Grad-CAM heatmap**, **learns from your corrections**, and includes a flashcard quiz with over **100 questions** to help people test and build their recycling knowledge.
 
 
-<p>
-  <img width=49% height=49% <img width="1781" height="902" alt="image" src="https://github.com/user-attachments/assets/4d11966a-44c7-4dd5-9251-3b979d3bd527" />
-  <img width=49% height=49% <img width="1677" height="856" alt="image" src="https://github.com/user-attachments/assets/45a38cf7-3b89-4821-8264-6caa50ff5098" />
-
-
-</p>
-<p>
-  <img width=49% height=49% <img width="1761" height="912" alt="image" src="https://github.com/user-attachments/assets/9fd6613d-42df-4e3f-972a-d9d4a909c19c" />
-  <img width=49% height=49% <img width="1760" height="917" alt="image" src="https://github.com/user-attachments/assets/06a3482c-1d71-43f5-bced-d717273fcdec" />
-</p>
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/7b349f26-e43c-4d96-bf9f-8ff4ce51ee36" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ad03c401-9024-4f0a-a07a-e0a624fb3011" width="100%"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/5bf15a3c-adfd-4dc6-bdcc-51a6b361d3d5" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/e98f63d4-677b-46fa-8c1d-047ba7a7f52d" width="100%"/></td>
+  </tr>
+</table> 
 
 
 **Live app:** https://eco-bin-sepia.vercel.app/
@@ -79,4 +79,4 @@ The app offers two features to help users make better disposal decisions.
 
 1. The first is a free AI tool in the **Scan Waste Item** tab. You take a photo of the item you want to dispose of and EcoBin runs its EfficientNet-B0 classifier to identify the object, show a Grad-CAM heatmap of what it looked at, report its confidence (flagging low-confidence predictions), and tell you how to dispose of it. If it gets something wrong, you can correct it and EcoBin remembers so it won't repeat the mistake.
 
-2. The second is the **Quiz Yourself** tab. We have over 100 flashcards in our database covering a wide range of waste items. Each quiz pulls up to 10 random cards and asks you to guess how each item should be disposed of — Recycling, Compost, or Garbage. After every question, you get an explanation of why your answer was right or wrong, and after all 10 you get a full results summary. You can retake the quiz up to 10 times.
+2. The second is the **Quiz Yourself** tab. We have over 100 flashcards in our database covering a wide range of waste items. Each quiz pulls up to 10 random cards and asks you to guess how each item should be disposed of: Recycling, Compost, or Garbage. After every question, you get an explanation of why your answer was right or wrong, and after all 10 you get a full results summary. You can retake the quiz up to 10 times.
