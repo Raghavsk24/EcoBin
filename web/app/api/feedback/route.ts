@@ -1,72 +1,76 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getServiceSupabase } from '@/lib/supabase';
-import { verifyTurnstileToken } from '@/lib/turnstile';
-import { ensureSessionId } from '@/lib/session';
+import { NextRequest, NextResponse } from "next/server";
 
-interface Body {
-  turnstileToken:        string;
-  imageBase64:           string;
-  modelPrediction:       unknown;
-  userCorrectedPathway:  string;
-  userCorrectedClass?:   string | null;
+// Proxy /api/feedback -> {HF_SPACE_URL}/feedback. This is what drives the
+// correction memory: { prediction_id, correct_item } teaches the backend the
+// right answer for a previous prediction.
+//
+// Optional: if Supabase env vars are configured, the correction is ALSO logged
+// to a `corrections` table on a best-effort basis. This is secondary — a missing
+// or failing Supabase never blocks the correction-memory call and never breaks
+// the build (the client is imported lazily only when env vars are present).
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const SPACE_URL = process.env.HF_SPACE_URL ?? "http://localhost:7860";
+const HF_TOKEN = process.env.HF_TOKEN;
+
+interface FeedbackBody {
+  prediction_id?: string;
+  correct_item?: string;
+}
+
+async function logToSupabase(body: FeedbackBody): Promise<void> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const service = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !service) return; // Supabase logging is opt-in.
+  try {
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(url, service, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+    await supabase.from("corrections").insert({
+      prediction_id: body.prediction_id ?? null,
+      correct_item: body.correct_item ?? null,
+    });
+  } catch {
+    // Best-effort only — never surface a logging failure to the user.
+  }
 }
 
 export async function POST(req: NextRequest) {
-  let body: Body;
+  let body: FeedbackBody;
   try {
-    body = (await req.json()) as Body;
+    body = (await req.json()) as FeedbackBody;
   } catch {
-    return NextResponse.json({ error: 'invalid_json' }, { status: 400 });
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  if (!body.turnstileToken) {
-    return NextResponse.json({ error: 'missing_turnstile' }, { status: 400 });
-  }
+  // Secondary, non-blocking: optional Supabase audit log.
+  void logToSupabase(body);
 
-  // Block spam before we touch Supabase
-  const ok = await verifyTurnstileToken(body.turnstileToken);
-  if (!ok) {
-    return NextResponse.json({ error: 'turnstile_failed' }, { status: 403 });
-  }
-
-  if (!body.imageBase64 || !body.userCorrectedPathway) {
-    return NextResponse.json({ error: 'missing_fields' }, { status: 400 });
-  }
-
-  const sid = ensureSessionId();
-  const supabase = getServiceSupabase();
-
-  // 1. Upload the image to the feedback-images bucket
-  const cleanBase64 = body.imageBase64.replace(/^data:image\/[^;]+;base64,/, '');
-  const buffer = Buffer.from(cleanBase64, 'base64');
-  const filename = `${sid}/${Date.now()}.jpg`;
-
-  const upload = await supabase
-    .storage
-    .from('feedback-images')
-    .upload(filename, buffer, {
-      contentType: 'image/jpeg',
-      upsert: false,
+  // Primary: teach the correction memory on the Space.
+  try {
+    const upstream = await fetch(`${SPACE_URL.replace(/\/$/, "")}/feedback`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(HF_TOKEN ? { Authorization: `Bearer ${HF_TOKEN}` } : {}),
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(30_000),
     });
 
-  if (upload.error) {
-    return NextResponse.json({ error: 'storage_failed', detail: upload.error.message }, { status: 500 });
-  }
-
-  // 2. Insert the row
-  const { error: insertError } = await supabase
-    .from('feedback')
-    .insert({
-      image_url:               upload.data.path,
-      model_prediction:        body.modelPrediction,
-      user_corrected_pathway:  body.userCorrectedPathway,
-      user_corrected_class:    body.userCorrectedClass ?? null,
-      user_session_id:         sid,
+    const text = await upstream.text();
+    return new NextResponse(text, {
+      status: upstream.status,
+      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
     });
-
-  if (insertError) {
-    return NextResponse.json({ error: 'db_failed', detail: insertError.message }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Upstream request failed";
+    return NextResponse.json(
+      { error: `Inference backend unreachable: ${message}` },
+      { status: 502 }
+    );
   }
-
-  return NextResponse.json({ ok: true });
 }
