@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'EcoBin',
-  description: 'Two-stage waste classifier. Point your camera at any item to find out which bin it belongs in.',
+  description: 'AI waste classifier. Point your camera at any item to find out which bin it belongs in.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -28,8 +28,9 @@ export default function AboutTab() {
 
       <p className="mb-5">
         The first is a free AI tool accessible in the "Scan Waste Item"
-        tab. Upload a photo of the waste item you want to dispose of and EcoBin runs a two-stage neural network that identifies what the
-        object is, assesses its condition, and then explains how to dispose of the item.
+        tab. Take a photo of the waste item you want to dispose of and EcoBin runs a single-stage EfficientNet-B0 classifier that identifies the
+        object and sorts it into Compost, Recycling, or Garbage. It shows a Grad-CAM heatmap of exactly what the model looked at, reports how confident it
+        is, and lets you correct it when it's wrong &mdash; EcoBin remembers your corrections so it won't repeat the same mistake.
       </p>
 
       <p className="mb-5">
@@ -41,7 +42,7 @@ export default function AboutTab() {
       </p>
 
       <p className="mb-5">
-        EcoBin is a research project, not a certified recycling authority. While Stage A achieves a pathway-level accuracy of 96.3% on its test set, that number was measured on studio-like photos from its training dataset, not on arbitrary phone or laptop camera photos from users like you. If EcoBin gives you a result that doesn't seem right, trust your instincts and check your local recycling guidelines. When in doubt, throw it out.
+        EcoBin is a research project, not a certified recycling authority. While the classifier achieves a pathway-level accuracy of about 96% on its test set, that number was measured on studio-like photos from its training dataset, not on arbitrary phone or laptop camera photos from users like you. If EcoBin gives you a result that doesn't seem right, trust your instincts and check your local recycling guidelines. When in doubt, throw it out.
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.875rem' }}>

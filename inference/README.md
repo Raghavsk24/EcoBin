@@ -14,8 +14,8 @@ FastAPI service that runs a single-stage **EfficientNet-B0** waste classifier on
 one uploaded image and returns a structured disposal recommendation, a Grad-CAM
 explainability overlay, and a confidence score. The model recognises 30 item
 classes and maps each to one of three disposal pathways: **Compost**, **Garbage**,
-or **Recycling**. There is no contamination check — recyclable items are simply
-classified as Recycling.
+or **Recycling**. Recyclable items are simply classified as Recycling; the model
+makes a single material-based decision and nothing overrides it.
 
 Images are fed to the model as **raw 0-255 RGB pixels** resized to 224×224.
 EfficientNet-B0 normalizes internally, so the service must not rescale.
