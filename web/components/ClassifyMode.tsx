@@ -14,9 +14,10 @@ const PATHWAY_COLOR: Record<Pathway, string> = {
 const MONO = "'Courier New', Courier, monospace";
 
 export default function ClassifyMode() {
-  const videoRef  = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
+  const videoRef     = useRef<HTMLVideoElement>(null);
+  const canvasRef    = useRef<HTMLCanvasElement>(null);
+  const streamRef    = useRef<MediaStream | null>(null);
+  const cancelledRef = useRef(false);
 
   const [preview,    setPreview]    = useState<string | null>(null);
   const [busy,       setBusy]       = useState(false);
@@ -25,8 +26,15 @@ export default function ClassifyMode() {
   const [camActive,  setCamActive]  = useState(false);
   const [camError,   setCamError]   = useState<string | null>(null);
 
+  // The camera opens automatically as soon as the Scan tab (this component) mounts.
   useEffect(() => {
-    return () => stopCamera();
+    cancelledRef.current = false;
+    openCamera();
+    return () => {
+      cancelledRef.current = true;
+      stopCamera();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function stopCamera() {
@@ -41,6 +49,10 @@ export default function ClassifyMode() {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: 'environment' } },
       });
+      if (cancelledRef.current) {
+        stream.getTracks().forEach(t => t.stop());
+        return;
+      }
       streamRef.current = stream;
       setCamActive(true);
       requestAnimationFrame(() => {
@@ -79,12 +91,14 @@ export default function ClassifyMode() {
     }
   }
 
+  // Clearing the result re-opens the camera so the user can scan another item.
   function reset() {
     stopCamera();
     setPreview(null);
     setResult(null);
     setInferError(null);
     setCamError(null);
+    openCamera();
   }
 
   const pathway = result?.pathway ?? null;
@@ -141,17 +155,6 @@ export default function ClassifyMode() {
             >
               <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#000' }} />
             </button>
-            <button
-              onClick={reset}
-              style={{
-                position: 'absolute', top: 12, right: 12,
-                background: 'rgba(0,0,0,0.5)', color: '#fff',
-                border: 'none', borderRadius: 4, padding: '4px 10px',
-                fontSize: '0.75rem', cursor: 'pointer',
-              }}
-            >
-              Cancel
-            </button>
           </div>
         ) : (
           <div
@@ -163,20 +166,24 @@ export default function ClassifyMode() {
             }}
           >
             <span style={{ fontSize: '3rem' }}>📷</span>
-            <button
-              onClick={openCamera}
-              style={{
-                border: '1px solid #000', padding: '10px 24px',
-                fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer',
-                background: '#000', color: '#fff', fontFamily: MONO,
-              }}
-            >
-              Open Camera
-            </button>
-            {camError && (
-              <p style={{ fontSize: '0.75rem', color: '#c00', textAlign: 'center', maxWidth: 240, padding: '0 16px' }}>
-                {camError}
-              </p>
+            {camError ? (
+              <>
+                <p style={{ fontSize: '0.75rem', color: '#c00', textAlign: 'center', maxWidth: 260, padding: '0 16px' }}>
+                  {camError}
+                </p>
+                <button
+                  onClick={openCamera}
+                  style={{
+                    border: '1px solid #000', padding: '8px 20px',
+                    fontSize: '0.8125rem', fontWeight: 600, cursor: 'pointer',
+                    background: '#000', color: '#fff', fontFamily: MONO,
+                  }}
+                >
+                  Retry camera
+                </button>
+              </>
+            ) : (
+              <p style={{ fontSize: '0.8125rem', color: '#777', fontFamily: MONO }}>Starting camera…</p>
             )}
           </div>
         )}
@@ -194,12 +201,12 @@ export default function ClassifyMode() {
               Instructions
             </p>
             <ol style={{ paddingLeft: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <li><strong>1.</strong> Click &ldquo;Open Camera&rdquo; and point it at the waste item you want to dispose of.</li>
+              <li><strong>1.</strong> The camera opens automatically. Point it at the waste item you want to dispose of.</li>
               <li><strong>2.</strong> Press the capture button to take a photo.</li>
-              <li><strong>3.</strong> Read EcoBin&apos;s determination on how your item should be disposed of, and see what the model looked at.</li>
+              <li><strong>3.</strong> Read EcoBin&apos;s determination on how your item should be disposed of, and see the Grad-CAM heatmap.</li>
             </ol>
-            <p style={{ marginTop: 16, fontSize: '0.75rem', color: '#555' }}>
-              <strong style={{ color: '#000' }}>Note:</strong> EcoBin was trained on studio-style images and may not perform well on real-world photos. If it makes a mistake, you can correct it &mdash; EcoBin remembers your correction.
+            <p style={{ marginTop: 'auto', paddingTop: 16, fontSize: '0.75rem', color: '#555' }}>
+              <strong style={{ color: '#000' }}>Note:</strong> EcoBin was trained on studio-style images and may not perform well on real-world photos. If it makes a mistake, you can correct it by typing what the waste item actually is.
             </p>
           </>
         ) : (
