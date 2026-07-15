@@ -78,3 +78,6 @@ The AI smart bin contains two bins that disposed waste items can be sorted into:
 
 ### Inference Backend
 The inference backend is a FastAPI service that lives inside the `/inference` directory. It classifies a waste image with the trained EfficientNetB0 model, returns a Grad-CAM explainability overlay that allows the uer to visualize what parts of the image affected the AI's classification of the item the most through a heatmap and uses a ***reinforcement learning technique*** called correction-memory, which allows the user to correct the models mistakes and those msitakes are then saved to memory, which the model learns from so it doesn't repeat the same mistake twice. The inference backend is connected to a Next.js frontend that's deployed on Vercel. This app runs on the iPad and acts as a touchscreen to the smart bin, adding another layer of technology onto it. 
+
+## License
+MIT
