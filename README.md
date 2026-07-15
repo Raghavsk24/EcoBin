@@ -42,7 +42,6 @@ EcoBin is an AI-powered smart bin that helps people sort their waste correctly a
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ## Classification Pipeline
-
 EcoBin uses a single-stage **EfficientNet-B0** image classifier. Given one photo it predicts which of **30 household-waste classes** the item belongs to and maps that class to one of three disposal pathways — **Recycling**, **Compost**, or **Garbage**. Images are fed to the model as raw 0-255 RGB pixels resized to 224×224 (EfficientNet-B0 normalizes internally), and the model returns the top class plus its softmax confidence. There is no contamination check — recyclable items are simply classified as Recycling.
 
 The classifier is served by a FastAPI app on a HuggingFace Space and exposes three endpoints:
@@ -52,7 +51,6 @@ The classifier is served by a FastAPI app on a HuggingFace Space and exposes thr
 - `POST /feedback` — `{ prediction_id, correct_item }` → stores a user correction.
 
 ### Class → pathway map
-
 Each of the 30 classes maps to one of three pathways:
 
 | Pathway | Classes |
@@ -62,16 +60,13 @@ Each of the 30 classes maps to one of three pathways:
 | Compost | food_waste, coffee_grounds, eggshells, tea_bags |
 
 ### Grad-CAM explainability
-
 Every prediction returns a Grad-CAM overlay: the gradient of the predicted-class score with respect to the backbone's last convolutional feature map is pooled, ReLU'd, upsampled to 224×224, colored with a JET colormap, and alpha-blended over the original frame. The result is returned as a base64 PNG so the UI can show exactly what region of the image drove the classification.
 
 ### Correction memory (learning from mistakes)
-
 When the model is wrong, the user can type the correct item. Rather than back-propagating into the CNN on a single example (which risks catastrophic forgetting), EcoBin stores the image's 1280-d embedding alongside the correct label in a tiny cosine-similarity memory. On every future prediction, the new image's embedding is compared against this memory; if it is very close to a stored correction, the model's guess is overridden and the result is flagged `corrected_by_memory`. This learns instantly, never touches the model weights, and persists to disk.
 
 ## Hardware Design
 ### Setup
-
 The AI smart bin contains two bins that disposed waste items can be sorted into: compost bin and garabge bin. Items that are classified as recycling by the waste classification model are re-routed to garbage. 
 
 | **Hardware Component** | **Description** |
@@ -82,5 +77,4 @@ The AI smart bin contains two bins that disposed waste items can be sorted into:
 | **Ipad Camera** | The iPad rear-view camera allows us to a picture of the waste classification object and run inference through HuggingFace Spaces to determine what bin it should be sorted into. We used an iPad camera becuase it acts as a touch screen for this smart trash can, allowing the user to visualize the picture of the waste object in a gradCam AI view, read the confidence level and correct the model if its wrong" |
 
 ### Inference Backend
-The inference backend is a FastAPI service that lives inside the `/inference` directory. It classifies a waste image with the trained EfficientNetB0 model, returns a Grad-CAM explainability
-overlay that allows the uer to visualize what parts of the image affected the AI's classification of the item the most through a heatmap and uses a ***reinforcement learning technique*** called correction-memory, which allows the user to correct the models mistakes and those msitakes are then saved to memory, which the model learns from so it doesn't repeat the same mistake twice. The inference backend is connected to a Next.js frontend that's deployed on Vercel. This app runs on the iPad and acts as a touchscreen to the smart bin, adding another layer of technology onto it. 
+The inference backend is a FastAPI service that lives inside the `/inference` directory. It classifies a waste image with the trained EfficientNetB0 model, returns a Grad-CAM explainability overlay that allows the uer to visualize what parts of the image affected the AI's classification of the item the most through a heatmap and uses a ***reinforcement learning technique*** called correction-memory, which allows the user to correct the models mistakes and those msitakes are then saved to memory, which the model learns from so it doesn't repeat the same mistake twice. The inference backend is connected to a Next.js frontend that's deployed on Vercel. This app runs on the iPad and acts as a touchscreen to the smart bin, adding another layer of technology onto it. 
