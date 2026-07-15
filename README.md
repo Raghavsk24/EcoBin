@@ -1,27 +1,23 @@
 # EcoBin
 
-EcoBin is an AI-powered waste classification platform that helps people sort their waste correctly and learn better recycling habits. Waste is a massive problem. In the United States alone, over 292 million tons of waste are generated each year, and that number is expected to double by 2050. Yet less than a third of our waste stream is actually recycled, largely because roughly a quarter of what ends up in recycling bins doesn't belong there.
+EcoBin is an AI-powered smart bin that helps people sort their waste correctly and learn better recycling habits. It runs an EfficientNet-B0 image classifier that reaches about **96 percent accuracy** across 30 household waste categories from a single photo of the disposed item, then maps that classification to one of three disposal pathways: `Recycling`, `Compost`, or `Garbage`.  I built a physical prototype using jenga blocks for the exterior, an HC-SR04 ultrasonic sensor to detect when an item is dropped onto the tray, a cardboard tray to hold the item, an SG90 servo motor to rotate the tray, an Arduino Uno R3 to power the circuit, and a web app running on an iPad to photograph the item and send it for inference. EcoBin won ***2nd Place Grand Award at the Arizona State Science & Engineering Fair.***
 
-EcoBin addresses this by using computer vision to automatically identify and categorize waste with **~95% accuracy**. It explains every prediction with a **Grad-CAM heatmap**, **learns from your corrections**, and includes a flashcard quiz with over **100 questions** to help people test and build their recycling knowledge.
+- **Live app:** https://eco-bin-sepia.vercel.app/
+- **Research Paper DOI:** https://arxiv.org/abs/2606.15547v1
+- **Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
 
+<br>
 
 <table>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/7b349f26-e43c-4d96-bf9f-8ff4ce51ee36" width="100%"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ad03c401-9024-4f0a-a07a-e0a624fb3011" width="100%"/></td>
-  </tr>
-  <tr>
+   <tr>
     <td><img src="https://github.com/user-attachments/assets/5bf15a3c-adfd-4dc6-bdcc-51a6b361d3d5" width="100%"/></td>
     <td><img src="https://github.com/user-attachments/assets/e98f63d4-677b-46fa-8c1d-047ba7a7f52d" width="100%"/></td>
   </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/26fd5811-8dcc-4872-8feb-3711de8d8f10" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ad03c401-9024-4f0a-a07a-e0a624fb3011" width="100%"/></td>
+  </tr>
 </table> 
-
-
-**Live app:** https://eco-bin-sepia.vercel.app/
-
-**Research Paper DOI:** https://arxiv.org/abs/2606.15547v1
-
-**Kaggle notebook:** https://www.kaggle.com/code/ragbag84/ecobin-two-stage-waste-classification-pipeline
 
 ## Tech stack
 
@@ -73,10 +69,18 @@ Every prediction returns a Grad-CAM overlay: the gradient of the predicted-class
 
 When the model is wrong, the user can type the correct item. Rather than back-propagating into the CNN on a single example (which risks catastrophic forgetting), EcoBin stores the image's 1280-d embedding alongside the correct label in a tiny cosine-similarity memory. On every future prediction, the new image's embedding is compared against this memory; if it is very close to a stored correction, the model's guess is overridden and the result is flagged `corrected_by_memory`. This learns instantly, never touches the model weights, and persists to disk.
 
-## Features
+## Hardware Design
+### Setup
 
-The app offers two features to help users make better disposal decisions.
+The AI smart bin contains two bins that disposed waste items can be sorted into: compost bin and garabge bin. Items that are classified as recycling by the waste classification model are re-routed to garbage. 
 
-1. The first is a free AI tool in the **Scan Waste Item** tab. You take a photo of the item you want to dispose of and EcoBin runs its EfficientNet-B0 classifier to identify the object, show a Grad-CAM heatmap of what it looked at, report its confidence (flagging low-confidence predictions), and tell you how to dispose of it. If it gets something wrong, you can correct it and EcoBin remembers so it won't repeat the mistake.
+| **Hardware Component** | **Description** |
+| ------------------ | ----------- |
+| **Arduino Uno:** | Microcontroller that powers the servo motor and ultrasonic sensor |
+| **HC-SR04 Ultrasonic Sensor:** | Constantly sends an echo out and back (up to a 30 centimeter threshold) to detect if a waste item has been dropped onto the cardboard tray |
+| **SG90 Servo Motor** | Rotates 60 degrees to the left if the disposed item is classified as compost and rotates 60 degrees to the right if the disposed item is classified as garbage. The rotation of the servo motor pushed the cardboard tray containing the waste item to rottate as well, which results in the item falling in an angle to its appropriate bin. |
+| **Ipad Camera** | The iPad rear-view camera allows us to a picture of the waste classification object and run inference through HuggingFace Spaces to determine what bin it should be sorted into. We used an iPad camera becuase it acts as a touch screen for this smart trash can, allowing the user to visualize the picture of the waste object in a gradCam AI view, read the confidence level and correct the model if its wrong" |
 
-2. The second is the **Quiz Yourself** tab. We have over 100 flashcards in our database covering a wide range of waste items. Each quiz pulls up to 10 random cards and asks you to guess how each item should be disposed of: Recycling, Compost, or Garbage. After every question, you get an explanation of why your answer was right or wrong, and after all 10 you get a full results summary. You can retake the quiz up to 10 times.
+### Inference Backend
+The inference backend is a FastAPI service that lives inside the `/inference` directory. It classifies a waste image with the trained EfficientNetB0 model, returns a Grad-CAM explainability
+overlay that allows the uer to visualize what parts of the image affected the AI's classification of the item the most through a heatmap and uses a ***reinforcement learning technique*** called correction-memory, which allows the user to correct the models mistakes and those msitakes are then saved to memory, which the model learns from so it doesn't repeat the same mistake twice. The inference backend is connected to a Next.js frontend that's deployed on Vercel. This app runs on the iPad and acts as a touchscreen to the smart bin, adding another layer of technology onto it. 
