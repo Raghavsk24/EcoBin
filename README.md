@@ -41,15 +41,6 @@ EcoBin is an AI-powered smart bin that helps people sort their waste correctly a
 ![HuggingFace](https://img.shields.io/badge/HuggingFace_Spaces-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-## Classification Pipeline
-EcoBin uses a single-stage **EfficientNet-B0** image classifier. Given one photo it predicts which of **30 household-waste classes** the item belongs to and maps that class to one of three disposal pathways — **Recycling**, **Compost**, or **Garbage**. Images are fed to the model as raw 0-255 RGB pixels resized to 224×224 (EfficientNet-B0 normalizes internally), and the model returns the top class plus its softmax confidence. There is no contamination check — recyclable items are simply classified as Recycling.
-
-The classifier is served by a FastAPI app on a HuggingFace Space and exposes three endpoints:
-
-- `GET /health` — liveness/warmth probe.
-- `POST /predict` — image → `{ item, pathway, confidence, low_confidence, gradcam, prediction_id, corrected_by_memory, ... }`.
-- `POST /feedback` — `{ prediction_id, correct_item }` → stores a user correction.
-
 ### Class → pathway map
 Each of the 30 classes maps to one of three pathways:
 
