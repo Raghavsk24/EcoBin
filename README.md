@@ -41,7 +41,7 @@ EcoBin is an AI-powered smart bin that helps people sort their waste correctly a
 ![HuggingFace](https://img.shields.io/badge/HuggingFace_Spaces-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-### Class → pathway map
+### Disposal Pathway Mapping
 Each of the 30 classes maps to one of three pathways:
 
 | Pathway | Classes |
